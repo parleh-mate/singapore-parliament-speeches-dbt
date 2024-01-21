@@ -12,7 +12,7 @@ with type_cast as (
         cast(section_type as string) as section_type,
         date(date) as date
     from {{ source('raw', 'topics') }}
-)
+),
 
 reorder as (
     select
