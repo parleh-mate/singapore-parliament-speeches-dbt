@@ -11,7 +11,7 @@ with attendance as (
         date,
         member_name,
         is_present
-    from {{ ref('fact_attendance') }}
+    from {{ ref('stg_attendance') }}
 ),
 
 seed_member as (
