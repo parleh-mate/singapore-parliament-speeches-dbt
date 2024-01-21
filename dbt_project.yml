@@ -32,10 +32,17 @@ models:
   singapore_parliament_speeches:
     mart:
       +materialized: table
+      +schema: mart
+      +tags: mart
     fact:
       +materialized: table
+      +schema: dim
+      +tags: dim
     dim:
       +materialized: table
+      +schema: fact
+      +tags: fact
     stg:
       +materialized: view
+      +schema: stg
       +tags: staging
