@@ -1,21 +1,19 @@
-{{
-    config(
-        materialized='incremental',
-        unique_key='speech_id',
-        partition_by={
-            "field": "date",
-            "data_type": "date",
-            "granularity": "day"
-        },
-        on_schema_change: "sync_all_columns",
-        incremental_strategy: "insert_overwrite"
-    )
-}}
+{{ config(
+    materialized='incremental',
+    unique_key='speech_id',
+    partition_by={
+        "field": "date",
+        "data_type": "date",
+        "granularity": "day"
+    },
+    on_schema_change= "sync_all_columns",
+    incremental_strategy= "insert_overwrite"
+) }}
 
 -- sources
 
 with speeches as (
-    select 
+    select
         speech_id,
         date,
         topic_id,
@@ -23,7 +21,7 @@ with speeches as (
         text
     from {{ ref('fact_speeches') }}
     {% if is_incremental() %}
-    where date >= (select max(date) from {{ this }})
+        where date >= (select max(date) from {{ this }})
     {% endif %}
 ),
 
@@ -32,9 +30,9 @@ topics as (
         topic_id,
         title,
         section_type
-    from {{ ref('dim_topics')}}
+    from {{ ref('dim_topics') }}
     {% if is_incremental() %}
-    where date >= (select max(date) from {{ this }})
+        where date >= (select max(date) from {{ this }})
     {% endif %}
 ),
 
@@ -45,9 +43,9 @@ sittings as (
         session,
         volume,
         sittings
-    from {{ ref('fact_sittings')}}
+    from {{ ref('fact_sittings') }}
     {% if is_incremental() %}
-    where date >= (select max(date) from {{ this }})
+        where date >= (select max(date) from {{ this }})
     {% endif %}
 ),
 
@@ -56,7 +54,7 @@ members as (
         member_name,
         party,
         gender
-    from {{ ref('dim_members')}}
+    from {{ ref('dim_members') }}
 ),
 
 joined as (
