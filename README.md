@@ -20,7 +20,7 @@ The main data product(s) intended for use is
 | model | description |
 |-------|-------------|
 |mart_attendance|By member, by sitting date, whether the member attended the parliamentary sitting or not. This is supplemented with information about the member and sitting.|
-|sittings|Each row represents one paragraph of text, based on the hansard, during the parliamentary sitting. This text corresponds to a speech (or part of a speech) made by a Member of Parliament on a given topic. This is supplemented with information about the topic, the sitting, and the member.|
+|mart_speeches|Each row represents one paragraph of text, based on the hansard, during the parliamentary sitting. This text corresponds to a speech (or part of a speech) made by a Member of Parliament on a given topic. This is supplemented with information about the topic, the sitting, and the member.|
 
 An example of how this dataset is being used is in this [Looker Studio dashboard](https://lookerstudio.google.com/s/qYJulld3Ss8) to show overall attendance.
 
