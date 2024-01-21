@@ -15,18 +15,7 @@ with type_cast as (
         date(left(topic_id, 10)) as date
 
     from {{ source('raw', 'speeches') }}
-),
-
-reorder as (
-    select
-        speech_id,
-        date,
-        topic_id,
-        speech_order,
-        member_name,
-        text
-    from type_cast
 )
 
 select *
-from reorder
+from type_cast

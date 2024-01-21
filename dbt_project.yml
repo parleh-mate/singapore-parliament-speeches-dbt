@@ -46,3 +46,6 @@ models:
       +materialized: view
       +schema: stg
       +tags: staging
+
+seeds:
+  +schema: seeds
