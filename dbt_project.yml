@@ -36,12 +36,12 @@ models:
       +tags: mart
     fact:
       +materialized: table
-      +schema: dim
-      +tags: dim
-    dim:
-      +materialized: table
       +schema: fact
       +tags: fact
+    dim:
+      +materialized: table
+      +schema: dim
+      +tags: dim
     stg:
       +materialized: view
       +schema: stg
