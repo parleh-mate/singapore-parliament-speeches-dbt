@@ -38,3 +38,4 @@ models:
       +materialized: table
     stg:
       +materialized: view
+      +tags: staging
