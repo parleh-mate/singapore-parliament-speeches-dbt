@@ -1,0 +1,9 @@
+sources:
+  - name: raw
+    config:
+      enabled: true
+    tables:
+      - name: attendance
+      - name: sittings
+      - name: speeches
+      - name: topics
