@@ -16,9 +16,7 @@ sittings as (
     select
         date,
         parliament,
-        session,
-        volume,
-        sittings
+        session
     from {{ ref('fact_sittings') }}
 ),
 
@@ -36,8 +34,6 @@ joined as (
         attendance.date,
         sittings.parliament,
         sittings.session,
-        sittings.volume,
-        sittings.sittings,
 
         -- member information
         attendance.member_name,
