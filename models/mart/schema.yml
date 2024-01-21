@@ -2,3 +2,4 @@ version: 2
 
 models:
     - name: mart_speeches
+    - name: mart_attendance
