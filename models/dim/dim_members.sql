@@ -29,7 +29,7 @@ agg_attendance as (
         member_name,
         min(date) as earliest_sitting,
         max(date) as latest_sitting,
-        countif(distinct if(is_present, date, null)) as count_sittings_present,
+        count(distinct if(is_present, date, null)) as count_sittings_present,
         count(distinct date) as count_sittings_total
     from attendance
     group by member_name
@@ -48,7 +48,7 @@ joined as (
         agg.count_sittings_total
     from agg_attendance as agg
     left join seed_member as seed
-    on agg.member_name = seed.member_name
+        on agg.member_name = seed.member_name
 )
 
 select *
