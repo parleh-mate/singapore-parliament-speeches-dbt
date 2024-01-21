@@ -1,11 +1,5 @@
 {{ config(
-    materialized='table',
-    unique_key='speech_id',
-    partition_by={
-        "field": "date",
-        "data_type": "date",
-        "granularity": "day"
-    }
+    materialized='table'
 ) }}
 
 -- sources
