@@ -1,13 +1,11 @@
 {{ config(
-    materialized='incremental',
+    materialized='table',
     unique_key='speech_id',
     partition_by={
         "field": "date",
         "data_type": "date",
         "granularity": "day"
-    },
-    on_schema_change= "sync_all_columns",
-    incremental_strategy= "insert_overwrite"
+    }
 ) }}
 
 -- sources
@@ -20,9 +18,6 @@ with speeches as (
         member_name,
         text
     from {{ ref('fact_speeches') }}
-    {% if is_incremental() %}
-        where date >= (select max(date) from {{ this }})
-    {% endif %}
 ),
 
 topics as (
@@ -31,9 +26,6 @@ topics as (
         title,
         section_type
     from {{ ref('dim_topics') }}
-    {% if is_incremental() %}
-        where date >= (select max(date) from {{ this }})
-    {% endif %}
 ),
 
 sittings as (
@@ -44,9 +36,6 @@ sittings as (
         volume,
         sittings
     from {{ ref('fact_sittings') }}
-    {% if is_incremental() %}
-        where date >= (select max(date) from {{ this }})
-    {% endif %}
 ),
 
 members as (
