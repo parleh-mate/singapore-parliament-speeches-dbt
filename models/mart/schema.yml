@@ -1,5 +1,3 @@
-version: 2
-
 models:
     - name: mart_speeches
       description: '{{ doc("mart_speeches") }}'
@@ -23,7 +21,7 @@ models:
     - name: mart_attendance
       description: '{{ doc("mart_attendance") }}'
 
-      colunns:
+      columns:
         - name: date
           description: '{{ doc("date") }}'
         - name: speech_id
