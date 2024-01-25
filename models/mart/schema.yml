@@ -2,4 +2,51 @@ version: 2
 
 models:
     - name: mart_speeches
+      description: {{ doc("mart_speeches") }}
+
+      columns:
+        - name: date
+          description: {{ doc("date") }}
+        - name: parliament
+          description: {{ doc("parliament") }}
+        - name: session
+          description: {{ doc("session") }}
+        - name: member_name
+          description: {{ doc("member_name") }}
+        - name: member_party
+          description: {{ doc("member_party") }}
+        - name: member_gender
+          description: {{ doc("member_gender") }}
+        - name: is_present
+          description: {{ doc("is_present") }}
+
     - name: mart_attendance
+      description: {{ doc("mart_attendance") }}
+
+      colunns:
+        - name: date
+          description: {{ doc("date") }}
+        - name: speech_id
+          description: {{ doc("speech_id") }}
+        - name: topic_id
+          description: {{ doc("topic_id") }}
+        - name: parliament
+          description: {{ doc("parliament") }}
+        - name: session
+          description: {{ doc("session") }}
+        - name: volume
+          description: {{ doc("volume") }}
+        - name: sittings
+          description: {{ doc("sittings") }}
+        - name: member_name
+          description: {{ doc("member_name") }}
+        - name: member_party
+          description: {{ doc("member_party") }}
+        - name: member_gender
+          description: {{ doc("member_gender") }}
+        - name: topic_title
+          description: {{ doc("topic_title") }}
+        - name: topic_type
+          description: {{ doc("topic_type") }}
+        - name: speech_text
+          description: {{ doc("speech_text") }}
