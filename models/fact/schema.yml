@@ -2,6 +2,55 @@ version: 2
 
 models:
     - name: fact_attendance
+      description: '{{ doc("models_attendance") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date
+              - member_name
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+        - name: is_present
+          description: '{{ doc("is_present") }}'
+
     - name: fact_sittings
+      description: '{{ doc("models_speeches") }}'
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+          tests:
+            - not_null
+            - unique
+        - name: datetime
+          description: '{{ doc("datetime") }}'
+        - name: parliament
+          description: '{{ doc("parliament") }}'
+        - name: session
+          description: '{{ doc("session") }}'
+        - name: volume
+          description: '{{ doc("volume") }}'
+        - name: sittings
+          description: '{{ doc("sittings") }}'
+
     - name: fact_speeches
+      description: '{{ doc("models_speeches") }}'
+      columns:
+        - name: speech_id
+          description: '{{ doc("speech_id") }}'
+          tests:
+            - not_null
+            - unique
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: topic_id
+          description: '{{ doc("topic_id") }}'
+        - name: speech_order
+          description: '{{ doc("speech_order") }}'
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+        - name: text
+          description: '{{ doc("speech_text") }}'
   
