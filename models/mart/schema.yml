@@ -1,6 +1,12 @@
 models:
-    - name: mart_speeches
-      description: '{{ doc("models_speeches") }}'
+
+    - name: mart_attendance
+      description: '{{ doc("models_attendance") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date
+              - member_name
 
       columns:
         - name: date
@@ -18,14 +24,17 @@ models:
         - name: is_present
           description: '{{ doc("is_present") }}'
 
-    - name: mart_attendance
-      description: '{{ doc("models_attendance") }}'
+    - name: mart_speeches
+      description: '{{ doc("models_speeches") }}'
 
       columns:
         - name: date
           description: '{{ doc("date") }}'
         - name: speech_id
           description: '{{ doc("speech_id") }}'
+          tests:
+            - not_null
+            - unique
         - name: topic_id
           description: '{{ doc("topic_id") }}'
         - name: parliament
