@@ -1,6 +1,6 @@
 models:
     - name: mart_speeches
-      description: '{{ doc("mart_speeches") }}'
+      description: '{{ doc("models_speeches") }}'
 
       columns:
         - name: date
@@ -19,7 +19,7 @@ models:
           description: '{{ doc("is_present") }}'
 
     - name: mart_attendance
-      description: '{{ doc("mart_attendance") }}'
+      description: '{{ doc("models_attendance") }}'
 
       columns:
         - name: date
