@@ -4,6 +4,10 @@ sources:
       enabled: true
     tables:
       - name: attendance
+        description: '{{ doc("models_attendance") }}'
       - name: sittings
+        description: '{{ doc("models_sittings") }}'
       - name: speeches
+        description: '{{ doc("models_speeches") }}'
       - name: topics
+        description: '{{ doc("models_topics") }}'
