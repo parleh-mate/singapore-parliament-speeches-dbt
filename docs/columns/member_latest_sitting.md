@@ -1,5 +1,5 @@
 {% docs member_latest_sitting %}
 
-tbd
+'Latest Sitting' represents the date of the member's latest recorded parliamentary sitting.
 
 {% enddocs %}

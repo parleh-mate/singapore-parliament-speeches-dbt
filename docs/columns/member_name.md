@@ -1,5 +1,5 @@
 {% docs member_name %}
 
-tbd
+'Member Name' refers to the full name of the Member of Parliament (MP) whose attendance is being recorded.
 
 {% enddocs %}

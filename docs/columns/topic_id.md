@@ -1,5 +1,5 @@
 {% docs topic_id %}
 
-tbd
+'Topic ID' represents the unique identifier for the topic or subject matter associated with the speech.
 
 {% enddocs %}

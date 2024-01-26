@@ -1,5 +1,5 @@
 {% docs topic_title %}
 
-tbd
+'Topic Title' represents the title or name of the parliamentary topic.
 
 {% enddocs %}

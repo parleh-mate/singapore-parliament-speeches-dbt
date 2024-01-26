@@ -1,5 +1,5 @@
 {% docs member_gender %}
 
-tbd
+'Gender' represents the gender of the member (M for Male, F for Female).
 
 {% enddocs %}

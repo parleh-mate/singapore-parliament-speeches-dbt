@@ -1,5 +1,5 @@
 {% docs topic_order %}
 
-tbd
+'Topic Order' denotes the sequence or order in which the topic was debated during the sitting.
 
 {% enddocs %}
