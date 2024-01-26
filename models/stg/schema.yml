@@ -2,7 +2,11 @@ version: 2
 
 models:
     - name: stg_attendance
+      description: '{{ doc("models_attendance") }}'
     - name: stg_sittings
+      description: '{{ doc("models_sittings") }}'
     - name: stg_speeches
+      description: '{{ doc("models_speeches") }}'
     - name: stg_topics
+      description: '{{ doc("models_topics") }}'
   
