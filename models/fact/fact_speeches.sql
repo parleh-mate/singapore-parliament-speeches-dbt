@@ -11,7 +11,9 @@ with source as (
         topic_id,
         speech_order,
         member_name,
-        text
+        text,
+        count_words,
+        count_characters
     from {{ ref('stg_speeches') }}
 )
 

@@ -10,7 +10,9 @@ with speeches as (
         date,
         topic_id,
         member_name,
-        text
+        text,
+        count_words,
+        count_characters
     from {{ ref('fact_speeches') }}
 ),
 
@@ -61,7 +63,9 @@ joined as (
         topics.section_type as topic_type,
 
         -- speech information
-        speeches.text as speech_text
+        speeches.text as speech_text,
+        speeches.count_words as count_speeches_words,
+        speeches.count_characters as count_speeches_characters
 
     from speeches
     left join topics
