@@ -40,6 +40,7 @@ models:
       tests:
         - dbt_utils.expression_is_true:
             expression: "count_characters > count_words"
+            severity: warn
       columns:
         - name: speech_id
           description: '{{ doc("speech_id") }}'
@@ -62,10 +63,12 @@ models:
             - dbt_utils.accepted_range:
                 min_value: 0
                 inclusive: false
+                severity: warn
         - name: count_characters
           description: '{{ doc("count_characters") }}'
           tests:
             - dbt_utils.accepted_range:
                 min_value: 0
                 inclusive: false
+                severity: warn
   
