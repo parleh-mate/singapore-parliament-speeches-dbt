@@ -12,7 +12,9 @@ with type_cast as (
         cast(speech_order as int64) as speech_order,
         cast(member_name as string) as member_name,
         cast(text as string) as text,
-        date(left(topic_id, 10)) as date
+        date(left(topic_id, 10)) as date,
+        cast(num_words as int64) as count_words,
+        cast(num_characters as int64) as count_characters
 
     from {{ source('raw', 'speeches') }}
 )

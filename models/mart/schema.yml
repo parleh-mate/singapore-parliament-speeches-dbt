@@ -57,3 +57,7 @@ models:
           description: '{{ doc("topic_type") }}'
         - name: speech_text
           description: '{{ doc("speech_text") }}'
+        - name: count_speeches_words
+          description: '{{ doc("count_words") }}'
+        - name: count_speeches_characters
+          description: '{{ doc("count_characters") }}'

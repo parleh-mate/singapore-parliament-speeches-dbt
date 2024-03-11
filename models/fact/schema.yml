@@ -37,6 +37,10 @@ models:
 
     - name: fact_speeches
       description: '{{ doc("models_speeches") }}'
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: "count_characters > count_words"
+            severity: warn
       columns:
         - name: speech_id
           description: '{{ doc("speech_id") }}'
@@ -53,4 +57,18 @@ models:
           description: '{{ doc("member_name") }}'
         - name: text
           description: '{{ doc("speech_text") }}'
+        - name: count_words
+          description: '{{ doc("count_words") }}'
+          tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                inclusive: false
+                severity: warn
+        - name: count_characters
+          description: '{{ doc("count_characters") }}'
+          tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                inclusive: false
+                severity: warn
   
