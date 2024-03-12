@@ -31,7 +31,7 @@ joined as (
         seed_topic_type.section_type_name
     from topics
     left join seed_topic_type
-        on topics.section_type = seed_topic_type.section_type
+        on topics.section_type = seed_topic_type.section_type_code
 )
 
 select *
