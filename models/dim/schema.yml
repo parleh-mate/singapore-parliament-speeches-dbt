@@ -38,3 +38,9 @@ models:
           description: '{{ doc("topic_title") }}'
         - name: section_type
           description: '{{ doc("topic_type") }}'
+          tests:
+            - not_null
+        - name: section_type_name
+          description: '{{ doc("topic_type") }}'
+          tests:
+            - not_null
