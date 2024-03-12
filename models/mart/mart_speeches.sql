@@ -20,7 +20,8 @@ topics as (
     select
         topic_id,
         title,
-        section_type
+        section_type,
+        section_type_name
     from {{ ref('dim_topics') }}
 ),
 
@@ -61,6 +62,7 @@ joined as (
         -- topic information
         topics.title as topic_title,
         topics.section_type as topic_type,
+        topics.section_type_name as topic_type_name,
 
         -- speech information
         speeches.text as speech_text,
