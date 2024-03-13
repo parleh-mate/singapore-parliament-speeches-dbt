@@ -49,4 +49,4 @@ flags as (
 )
 
 select *
-from joined
+from flags
