@@ -44,7 +44,7 @@ flags as (
         section_type,
         section_type_name,
         -- introduced in this cte
-        lower(title) like "%constitution%" and section_type in ("BI", "BP") as is_constitutional
+        section_type in ("BI", "BP") and lower(title) like "%constitution%" as is_constitutional
     from joined
 )
 
