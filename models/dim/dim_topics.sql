@@ -32,6 +32,20 @@ joined as (
     from topics
     left join seed_topic_type
         on topics.section_type = seed_topic_type.section_type_code
+),
+
+flags as (
+    select
+        -- from previous cte
+        topic_id,
+        date,
+        topic_order,
+        title,
+        section_type,
+        section_type_name,
+        -- introduced in this cte
+        section_type in ("BI", "BP") and lower(title) like "%constitution%" as is_constitutional
+    from joined
 )
 
 select *

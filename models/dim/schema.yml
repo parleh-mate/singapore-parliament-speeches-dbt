@@ -44,3 +44,5 @@ models:
           description: '{{ doc("topic_type") }}'
           tests:
             - not_null
+        - name: is_constitutional
+          description: '{{ doc("is_constitutional") }}'

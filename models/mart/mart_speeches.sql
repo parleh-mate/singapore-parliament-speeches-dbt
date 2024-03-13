@@ -63,6 +63,7 @@ joined as (
         topics.title as topic_title,
         topics.section_type as topic_type,
         topics.section_type_name as topic_type_name,
+        topics.is_constitutional as is_constitutional,
 
         -- speech information
         speeches.text as speech_text,
