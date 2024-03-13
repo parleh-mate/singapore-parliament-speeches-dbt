@@ -1,0 +1,16 @@
+{% docs is_constitutional %}
+
+'Is Constitutional' is a boolean field indicating whether the topic concerns a constitution amendment.
+
+This applies only if:
+
+* The topic is was bill introduced ("BI") or bill in second or third reading ("BP").
+* The topic contains the word "Constitution".
+
+Typical examples of topic names which qualify are:
+
+* Constitution of the Republic of Singapore (Amendment) Bill
+* Constitution of the Republic of Singapore (Amendment No 2) Bill
+* Constitution of the Republic of Singapore (Amendment No 3) Bill 
+
+{% enddocs %}
