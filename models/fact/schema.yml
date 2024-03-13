@@ -71,4 +71,11 @@ models:
                 min_value: 0
                 inclusive: false
                 severity: warn
-  
+        - name: speech_order_by_topic
+          description: '{{ doc("speech_order_by_topic") }}'
+        - name: replying_member_name
+          description: '{{ doc("replying_member_name") }}'
+        - name: is_primary_question
+          description: '{{ doc("is_primary_question") }}'
+        - name: is_supplementary_question
+          description: '{{ doc("is_supplementary_question") }}'
