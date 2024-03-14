@@ -11,7 +11,7 @@ with topics as (
         topic_order,
         title,
         section_type
-    from {{ ref('stg_topics') }}
+    from {{ ref('stg_topics') }} 
 ),
 
 seed_topic_type as (
