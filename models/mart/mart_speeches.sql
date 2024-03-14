@@ -21,7 +21,8 @@ topics as (
         topic_id,
         title,
         section_type,
-        section_type_name
+        section_type_name,
+        is_constitutional
     from {{ ref('dim_topics') }}
 ),
 
