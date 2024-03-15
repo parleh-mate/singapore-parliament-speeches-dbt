@@ -65,3 +65,22 @@ models:
           description: '{{ doc("count_words") }}'
         - name: count_speeches_characters
           description: '{{ doc("count_characters") }}'
+
+    - name: mart_bills
+      description: '{{ doc("models_bills") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - year
+              - title
+
+      columns:
+        - name: year
+        - name: first_reading_date
+        - name: first_reading_topic
+        - name: day_diff_first_second_reading
+        - name: second_reading_date
+        - name: second_reading_topic
+        - name: day_diff_second_third_reading
+        - name: third_reading_date
+        - name: third_reading_topic
