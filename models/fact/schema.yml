@@ -16,6 +16,24 @@ models:
         - name: is_present
           description: '{{ doc("is_present") }}'
 
+    - name: fact_bill_activity
+      description: '{{ doc("models_bill_activity") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date
+              - topic_id
+              - reading
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: topic_id
+          description: '{{ doc("topic_id") }}'
+        - name: title
+          description: '{{ doc("topic_title") }}'
+        - name: reading
+          description: '{{ doc("reading") }}'
+
     - name: fact_sittings
       description: '{{ doc("models_speeches") }}'
       columns:
