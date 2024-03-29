@@ -1,4 +1,4 @@
-# Structured dataset for Singapore's Parliament Speeches
+# Structured Datasets for Singapore's Parliament Speeches
 This project aims to make parliament speeches from Singapore's Parliament Hansard structured and accessible. 
 
 A structured format is an enabler. There are applications in computational linguistic analysis, classification, and political science *(Dritsa et. al., 2022)*. Further empirical research on parliamentary discourse and its wider societal impact in recent times is ever more important, given the decisive role of parlimanets and their rapidly changing relations with the public and media *(Erjavec et. al., 2023)*.
@@ -14,6 +14,8 @@ While best efforts are made to ensure the information is accurate, there may be 
 # This repository
 
 This repository contains code for the data modelling which performs downstream modelling from the raw data which was generated from the [earlier data pipeline](https://github.com/jeremychia/singapore-parliament-speeches/).
+
+Please refer to the [dbt Documentation](https://jeremychia.github.io/singapore-parliament-speeches-dbt/#!/overview), which contains information on the columns available and their descriptions. This was created with the help of [this article](https://medium.com/dbt-local-taiwan/host-dbt-documentation-site-with-github-pages-in-5-minutes-7b80e8b62feb).
 
 The main data product(s) intended for use is
 

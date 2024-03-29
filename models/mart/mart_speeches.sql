@@ -10,7 +10,9 @@ with speeches as (
         date,
         topic_id,
         member_name,
-        text
+        text,
+        count_words,
+        count_characters
     from {{ ref('fact_speeches') }}
 ),
 
@@ -18,7 +20,9 @@ topics as (
     select
         topic_id,
         title,
-        section_type
+        section_type,
+        section_type_name,
+        is_constitutional
     from {{ ref('dim_topics') }}
 ),
 
@@ -59,9 +63,13 @@ joined as (
         -- topic information
         topics.title as topic_title,
         topics.section_type as topic_type,
+        topics.section_type_name as topic_type_name,
+        topics.is_constitutional as is_constitutional,
 
         -- speech information
-        speeches.text as speech_text
+        speeches.text as speech_text,
+        speeches.count_words as count_speeches_words,
+        speeches.count_characters as count_speeches_characters
 
     from speeches
     left join topics

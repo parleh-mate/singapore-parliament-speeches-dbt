@@ -1,5 +1,86 @@
-version: 2
-
 models:
-    - name: mart_speeches
+
     - name: mart_attendance
+      description: '{{ doc("models_attendance") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date
+              - member_name
+
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: parliament
+          description: '{{ doc("parliament") }}'
+        - name: session
+          description: '{{ doc("session") }}'
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+        - name: member_party
+          description: '{{ doc("member_party") }}'
+        - name: member_gender
+          description: '{{ doc("member_gender") }}'
+        - name: is_present
+          description: '{{ doc("is_present") }}'
+
+    - name: mart_speeches
+      description: '{{ doc("models_speeches") }}'
+
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: speech_id
+          description: '{{ doc("speech_id") }}'
+          tests:
+            - not_null
+            - unique
+        - name: topic_id
+          description: '{{ doc("topic_id") }}'
+        - name: parliament
+          description: '{{ doc("parliament") }}'
+        - name: session
+          description: '{{ doc("session") }}'
+        - name: volume
+          description: '{{ doc("volume") }}'
+        - name: sittings
+          description: '{{ doc("sittings") }}'
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+        - name: member_party
+          description: '{{ doc("member_party") }}'
+        - name: member_gender
+          description: '{{ doc("member_gender") }}'
+        - name: topic_title
+          description: '{{ doc("topic_title") }}'
+        - name: topic_type
+          description: '{{ doc("topic_type") }}'
+        - name: topic_type_name
+          description: '{{ doc("topic_type") }}'
+        - name: is_constitutional
+          description: '{{ doc("is_constitutional") }}'
+        - name: speech_text
+          description: '{{ doc("speech_text") }}'
+        - name: count_speeches_words
+          description: '{{ doc("count_words") }}'
+        - name: count_speeches_characters
+          description: '{{ doc("count_characters") }}'
+
+    - name: mart_bills
+      description: '{{ doc("models_bills") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - year
+              - title
+
+      columns:
+        - name: year
+        - name: first_reading_date
+        - name: first_reading_topic
+        - name: day_diff_first_second_reading
+        - name: second_reading_date
+        - name: second_reading_topic
+        - name: day_diff_second_third_reading
+        - name: third_reading_date
+        - name: third_reading_topic

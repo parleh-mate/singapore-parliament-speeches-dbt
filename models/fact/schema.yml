@@ -2,6 +2,91 @@ version: 2
 
 models:
     - name: fact_attendance
+      description: '{{ doc("models_attendance") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date
+              - member_name
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+        - name: is_present
+          description: '{{ doc("is_present") }}'
+
+    - name: fact_bill_activity
+      description: '{{ doc("models_bill_activity") }}'
+      tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - date
+              - topic_id
+              - reading
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: topic_id
+          description: '{{ doc("topic_id") }}'
+        - name: title
+          description: '{{ doc("topic_title") }}'
+        - name: reading
+          description: '{{ doc("reading") }}'
+
     - name: fact_sittings
+      description: '{{ doc("models_speeches") }}'
+      columns:
+        - name: date
+          description: '{{ doc("date") }}'
+          tests:
+            - not_null
+            - unique
+        - name: datetime
+          description: '{{ doc("datetime") }}'
+        - name: parliament
+          description: '{{ doc("parliament") }}'
+        - name: session
+          description: '{{ doc("session") }}'
+        - name: volume
+          description: '{{ doc("volume") }}'
+        - name: sittings
+          description: '{{ doc("sittings") }}'
+
     - name: fact_speeches
+      description: '{{ doc("models_speeches") }}'
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: "count_characters > count_words"
+            severity: warn
+      columns:
+        - name: speech_id
+          description: '{{ doc("speech_id") }}'
+          tests:
+            - not_null
+            - unique
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: topic_id
+          description: '{{ doc("topic_id") }}'
+        - name: speech_order
+          description: '{{ doc("speech_order") }}'
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+        - name: text
+          description: '{{ doc("speech_text") }}'
+        - name: count_words
+          description: '{{ doc("count_words") }}'
+          tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                inclusive: false
+                severity: warn
+        - name: count_characters
+          description: '{{ doc("count_characters") }}'
+          tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                inclusive: false
+                severity: warn
   

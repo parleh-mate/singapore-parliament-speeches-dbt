@@ -2,4 +2,47 @@ version: 2
 
 models:
     - name: dim_members
+      description: '{{ doc("models_members") }}'
+      columns:
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+          tests:
+            - not_null
+            - unique
+        - name: party
+          description: '{{ doc("member_party") }}'
+        - name: gender
+          description: '{{ doc("member_gender") }}'
+        - name: earliest_sitting
+          description: '{{ doc("member_earliest_sitting") }}'
+        - name: latest_sitting
+          description: '{{ doc("member_latest_sitting") }}'
+        - name: count_sittings_present
+          description: '{{ doc("member_count_sittings_present") }}'
+        - name: count_sittings_total
+          description: '{{ doc("member_count_sittings_total") }}'
+
     - name: dim_topics
+      description: '{{ doc("models_topics") }}'
+      columns:
+        - name: topic_id
+          description: '{{ doc("topic_id") }}'
+          tests:
+            - not_null
+            - unique
+        - name: date
+          description: '{{ doc("date") }}'
+        - name: topic_order
+          description: '{{ doc("topic_order") }}'
+        - name: title
+          description: '{{ doc("topic_title") }}'
+        - name: section_type
+          description: '{{ doc("topic_type") }}'
+          tests:
+            - not_null
+        - name: section_type_name
+          description: '{{ doc("topic_type") }}'
+          tests:
+            - not_null
+        - name: is_constitutional
+          description: '{{ doc("is_constitutional") }}'

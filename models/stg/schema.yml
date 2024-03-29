@@ -1,8 +1,34 @@
 version: 2
 
 models:
-    - name: stg_attendance
-    - name: stg_sittings
-    - name: stg_speeches
-    - name: stg_topics
-  
+  - name: stg_attendance
+    description: '{{ doc("models_attendance") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - date
+            - member_name
+  - name: stg_sittings
+    description: '{{ doc("models_sittings") }}'
+    columns:
+      - name: date
+        description: '{{ doc("date") }}'
+        tests:
+          - not_null
+          - unique
+  - name: stg_speeches
+    description: '{{ doc("models_speeches") }}'
+    columns:
+      - name: speech_id
+        description: '{{ doc("speech_id") }}'
+        tests:
+          - not_null
+          - unique
+  - name: stg_topics
+    description: '{{ doc("models_topics") }}'
+    columns:
+      - name: topic_id
+        description: '{{ doc("topic_id") }}'
+        tests:
+           - not_null
+           - unique
