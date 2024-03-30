@@ -21,6 +21,20 @@ seed_topic_type as (
     from {{ ref('topic_type') }}
 ),
 
+topic_group as (
+    select
+        topic_id,
+        topic_group_id
+    from {{ ref('stg_topic_group') }}
+),
+
+topic_name as (
+    select
+        topic_group_id,
+        topic_group_name
+    from {{ ref('stg_topic_names') }}
+),
+
 joined as (
     select
         topics.topic_id,
@@ -28,10 +42,16 @@ joined as (
         topics.topic_order,
         topics.title,
         topics.section_type,
-        seed_topic_type.section_type_name
+        seed_topic_type.section_type_name,
+        topic_group.topic_group_id,
+        topic_name.topic_group_name
     from topics
     left join seed_topic_type
         on topics.section_type = seed_topic_type.section_type_code
+    left join topic_group
+        on topics.topic_id = topic_group.topic_id
+    left join topic_name
+        on topic_group.topic_group_id = topic_name.topic_group_id
 ),
 
 flags as (
@@ -43,6 +63,8 @@ flags as (
         title,
         section_type,
         section_type_name,
+        topic_group_id,
+        topic_group_name,
         -- introduced in this cte
         section_type in ("BI", "BP") and lower(title) like "%constitution%" as is_constitutional
     from joined

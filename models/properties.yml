@@ -11,3 +11,11 @@ sources:
         description: '{{ doc("models_speeches") }}'
       - name: topics
         description: '{{ doc("models_topics") }}'
+  - name: topic_modelling
+    config:
+      enabled: true
+    tables:
+      - name: highest_topic_16_nmf_20240330
+        description: '{{ doc("ml_highest_topics") }}'
+      - name: topic_names_16_nmf_20240330
+        description: '{{ doc("ml_topic_names") }}'

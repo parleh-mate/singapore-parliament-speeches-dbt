@@ -32,3 +32,19 @@ models:
         tests:
            - not_null
            - unique
+  - name: stg_topic_group
+    description: '{{ doc("ml_highest_topics") }}'
+    columns:
+      - name: topic_id
+        description: '{{ doc("topic_id") }}'
+        tests:
+          - not_null
+          - unique
+  - name: stg_topic_names
+    description: '{{ doc("ml_topic_names") }}'
+    columns:
+      - name: topic_group_id
+        description: '{{ doc("topic_group_id") }}'
+        tests:
+          - not_null
+          - unique
