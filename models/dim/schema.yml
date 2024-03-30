@@ -47,9 +47,9 @@ models:
         - name: topic_group_id
           description: '{{ doc("topic_group_id") }}'
           tests:
-            - not_null
-              config:
-                severity: warn
+            - not_null:
+                config:
+                  severity: warn
         - name: topic_group_name
           description: '{{ doc("topic_group_name") }}'
         - name: is_constitutional
