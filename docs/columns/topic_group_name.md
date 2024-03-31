@@ -8,7 +8,7 @@ select
     topic as topic_group_id,
     topic_summary as topic_group_name,
     top_n_words
-from `singapore-parliament-speeches.topic_modelling.topic_names_16_nmf_20240330`
+from `singapore-parliament-speeches.topic_modelling.topic_names_19_nmf_20240331`
 order by topic_group_id
 ```
 
