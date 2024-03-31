@@ -15,7 +15,7 @@ sources:
     config:
       enabled: true
     tables:
-      - name: highest_topic_16_nmf_20240330
+      - name: highest_topic_25_nmf_20240331
         description: '{{ doc("ml_highest_topics") }}'
-      - name: topic_names_16_nmf_20240330
+      - name: topic_names_25_nmf_20240331
         description: '{{ doc("ml_topic_names") }}'
