@@ -31,6 +31,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   singapore_parliament_speeches:
+    +persist_docs:
+      relation: true
+      columns: true
     mart:
       +materialized: table
       +schema: mart
