@@ -12,6 +12,7 @@ with attendance as (
         member_name,
         is_present
     from {{ ref('stg_attendance') }}
+    where member_name is not null
 ),
 
 seed_member as (
