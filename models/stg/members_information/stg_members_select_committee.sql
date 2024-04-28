@@ -72,6 +72,13 @@ with
             parliament_sesion_dates
             on cast(array_agg.parliament as int) = parliament_sesion_dates.parliament
             and cast(array_agg.session as int) = parliament_sesion_dates.session
+    ),
+    add_latest_flag as (
+        select
+            *,
+            effective_to_date is null  -- when it is null, this is the current appointment
+            and effective_from_date is not null as is_latest_committee
+        from join_dates
     )
 select *
-from join_dates
+from add_latest_flag
