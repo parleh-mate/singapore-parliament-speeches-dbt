@@ -34,6 +34,22 @@ models:
         - name: reading
           description: '{{ doc("reading") }}'
 
+    - name: fact_member_positions
+      description: '{{ doc("models_member_positions") }}'
+      columns:
+        - name: member_name
+          description: '{{ doc("member_name") }}'
+        - name: type
+          description: '{{ doc("position_type") }}'
+        - name: member_position
+          description: '{{ doc("member_position") }}'
+        - name: effective_from_date
+          description: '{{ doc("effective_from_date") }}'
+        - name: effective_to_date
+          description: '{{ doc("effective_to_date") }}'
+        - name: is_latest_position
+          description: '{{ doc("is_latest_position") }}'
+
     - name: fact_sittings
       description: '{{ doc("models_speeches") }}'
       columns:

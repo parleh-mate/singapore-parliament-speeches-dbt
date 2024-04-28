@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: stg_members_full_name
+    description: '{{ doc("models_members_full_name") }}'
+    columns:
+      - name: member_name
+        description: '{{ doc("member_name") }}'
+        tests:
+          - not_null
+          - unique
+  - name: stg_members_image
+    description: '{{ doc("models_members_image") }}'
+    columns:
+      - name: member_name
+        description: '{{ doc("member_name") }}'
+        tests:
+          - not_null
+          - unique   
+  - name: stg_members_member_of_parliament
+    description: '{{ doc("models_members_member_of_parliament") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - member_name
+            - member_constituency
+            - effective_from_date
+  - name: stg_members_office_holding
+    description: '{{ doc("models_members_office_holding") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - member_name
+            - member_appointment
+            - effective_from_date
+  - name: stg_members_select_committee
+    description: '{{ doc("models_members_select_committee") }}'
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - member_name
+            - member_committee
+            - parliament
+            - session    
+  - name: stg_members_year_of_birth
+    description: '{{ doc("models_members_year_of_birth") }}'
+    columns:
+      - name: member_name
+        description: '{{ doc("member_name") }}'
+        tests:
+          - not_null
+          - unique   
