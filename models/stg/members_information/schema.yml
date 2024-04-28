@@ -22,22 +22,24 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - constituency
+            - member_constituency
+            - effective_from_date
             - member_name
   - name: stg_members_office_holding
     description: '{{ doc("models_members_office_holding") }}'
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - position
+            - member_appointment
             - member_name
   - name: stg_members_select_committee
     description: '{{ doc("models_members_select_committee") }}'
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - committee
-            - parliament_session
+            - member_committee
+            - parliament
+            - session
             - member_name    
   - name: stg_members_year_of_birth
     description: '{{ doc("models_members_year_of_birth") }}'
