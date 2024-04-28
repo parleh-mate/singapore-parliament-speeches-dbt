@@ -8,6 +8,14 @@ with
             {{ adapter.quote("to_date") }} as effective_to_date
 
         from source
+    ),
+    add_latest_flag as (
+        select
+            *,
+            effective_to_date
+            is null  -- when it is null, this is the current appointment
+            as is_latest_appointment
+        from renamed
     )
 select *
-from renamed
+from add_latest_flag
