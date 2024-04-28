@@ -11,6 +11,19 @@ sources:
         description: '{{ doc("models_speeches") }}'
       - name: topics
         description: '{{ doc("models_topics") }}'
+      - name: members_full_name
+        description: '{{ doc("models_members_full_name") }}'
+      - name: members_image
+        description: '{{ doc("models_members_image") }}'
+      - name: members_member_of_parliament
+        description: '{{ doc("models_members_member_of_parliament") }}'
+      - name: members_office_holding
+        description: '{{ doc("models_members_office_holding") }}'
+      - name: members_select_committee
+        description: '{{ doc("models_members_select_committee") }}'
+      - name: members_year_of_birth
+        description: '{{ doc("models_members_year_of_birth") }}'
+
   - name: topic_modelling
     config:
       enabled: true
