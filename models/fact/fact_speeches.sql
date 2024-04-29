@@ -10,7 +10,9 @@ with
             member_name,
             text,
             count_words,
-            count_characters
+            count_characters,
+            count_sentences,
+            count_syllables
         from {{ ref("stg_speeches") }}
     )
 

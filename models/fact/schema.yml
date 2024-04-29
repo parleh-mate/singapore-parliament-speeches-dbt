@@ -105,4 +105,17 @@ models:
                 min_value: 0
                 inclusive: false
                 severity: warn
-  
+        - name: count_sentences
+          description: '{{ doc("count_sentences") }}'
+          tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                inclusive: false
+                severity: warn
+        - name: count_syllables
+          description: '{{ doc("count_syllables") }}'
+          tests:
+            - dbt_utils.accepted_range:
+                min_value: 0
+                inclusive: false
+                severity: warn
