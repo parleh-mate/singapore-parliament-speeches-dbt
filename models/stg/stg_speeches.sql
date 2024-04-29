@@ -21,7 +21,38 @@ with
             date(left(topic_id, 10)) as date
 
         from {{ source("raw", "speeches") }}
+    ),
+
+    standardise_member_name as (
+        select
+            * except (member_name),
+            case
+                when member_name = 'Edwin Tong'
+                then 'Edwin Tong Chun Fai'
+                when member_name = 'Pritam'
+                then 'Pritam Singh'
+                when member_name = 'Josephine'
+                then 'Josephine Teo'
+                when member_name = 'Melvin Yong'
+                then 'Melvin Yong Yik Chye'
+                when member_name = 'Depty Speaker'
+                then 'Deputy Speaker'
+                when member_name = 'Leong Wai Mun'
+                then 'Leong Mun Wai'
+                when member_name = 'Mr K Shanmugam'
+                then 'K Shanmugam'
+                when member_name = 'Mr Ong Ye Kung'
+                then 'Ong Ye Kung'
+                when member_name = 'Speaker in the Chair'
+                then 'Speaker'
+                when member_name = 'Foo Mee Har West Coast'
+                then 'Foo Mee Har'
+                when member_name = 'Denise Phua Lay'
+                then 'Denise Phua Lay Peng'
+                else member_name
+            end as member_name
+        from type_cast
     )
 
 select *
-from type_cast
+from standardise_member_name
