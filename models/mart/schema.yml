@@ -65,6 +65,10 @@ models:
           description: '{{ doc("count_words") }}'
         - name: count_speeches_characters
           description: '{{ doc("count_characters") }}'
+        - name: count_speeches_sentences
+          description: '{{ doc("count_sentences") }}'
+        - name: count_speeches_syllables
+          description: '{{ doc("count_syllables") }}'
 
     - name: mart_bills
       description: '{{ doc("models_bills") }}'
