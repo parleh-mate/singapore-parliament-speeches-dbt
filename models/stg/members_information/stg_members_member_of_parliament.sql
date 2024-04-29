@@ -17,14 +17,11 @@ with
         select
             member_name,
             member_constituency,
-            min(effective_from_date) as effective_from_date,
+            effective_from_date,
             case
-                when countif(lower(date_range) like '%current%') = 1
-                then null
-                else max(effective_to_date)
+                when lower(date_range) like '%current%' then null else effective_to_date
             end as effective_to_date
         from renamed
-        group by all
     ),
 
     add_latest_flag as (
