@@ -4,7 +4,15 @@
 with
     speeches as (
         select
-            speech_id, date, topic_id, member_name, text, count_words, count_characters
+            speech_id,
+            date,
+            topic_id,
+            member_name,
+            text,
+            count_words,
+            count_characters,
+            count_sentences,
+            count_syllables
         from {{ ref("fact_speeches") }}
     ),
 
@@ -45,7 +53,9 @@ with
             -- speech information
             speeches.text as speech_text,
             speeches.count_words as count_speeches_words,
-            speeches.count_characters as count_speeches_characters
+            speeches.count_characters as count_speeches_characters,
+            speeches.count_sentences as count_speeches_sentences,
+            speeches.count_syllables as count_speeches_syllables
 
         from speeches
         left join topics on speeches.topic_id = topics.topic_id

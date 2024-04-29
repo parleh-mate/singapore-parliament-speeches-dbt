@@ -16,6 +16,8 @@ with
             cast(text as string) as text,
             cast(num_words as int64) as count_words,
             cast(num_characters as int64) as count_characters,
+            cast(num_sentences as int64) as count_sentences,
+            cast(num_syllables as int64) as count_syllables,
             date(left(topic_id, 10)) as date
 
         from {{ source("raw", "speeches") }}
