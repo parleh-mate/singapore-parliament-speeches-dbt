@@ -28,6 +28,21 @@ with
 
     members as (select member_name, party, gender from {{ ref("dim_members") }}),
 
+    constituencies as (
+        select
+            member_name,
+            member_position as constituency,
+            date(effective_from_date) as effective_from_date,
+            coalesce(date(effective_to_date), current_date()) as effective_to_date
+        from {{ ref("fact_member_positions") }}
+        where type = 'constituency'
+    ),
+
+    appointments as (
+        select date, member_name, appointments, count_concurrent_appointments
+        from {{ ref("mart_prep_appointment_by_date") }}
+    ),
+
     joined as (
         select
             -- metadata
@@ -43,6 +58,14 @@ with
             speeches.member_name,
             members.party as member_party,
             members.gender as member_gender,
+            case
+                when members.party = 'NMP'
+                then 'Nominated Member of Parliament'
+                else constituencies.constituency
+            end as member_constituency,
+            appointments.appointments as member_appointments,
+            appointments.count_concurrent_appointments
+            as member_count_concurrent_appointments,
 
             -- topic information
             topics.title as topic_title,
@@ -61,6 +84,16 @@ with
         left join topics on speeches.topic_id = topics.topic_id
         left join sittings on speeches.date = sittings.date
         left join members on speeches.member_name = members.member_name
+        left join
+            constituencies
+            on speeches.member_name = constituencies.member_name
+            and speeches.date
+            between constituencies.effective_from_date
+            and constituencies.effective_to_date
+        left join
+            appointments
+            on speeches.member_name = appointments.member_name
+            and speeches.date = appointments.date
     )
 
 select *
