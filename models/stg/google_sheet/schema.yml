@@ -1,0 +1,68 @@
+version: 2
+sources:
+  - name: google_sheets
+    description: >
+      This source contains data stored in Google Sheets that are manually maintained.
+    project: singapore-parliament-speeches
+    dataset: google_sheets
+    loader: external_table
+    tags:
+      - source
+      - google_sheet
+    tables:
+      - name: member_of_parliament
+        description: >
+          Constituency Data that were manually filled.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_member_of_parliament
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+          - name: constituency
+            data_type: STRING
+          - name: from_date
+            data_type: STRING
+          - name: to_date
+            data_type: STRING
+          - name: accessed_at
+            data_type: STRING
+      - name: year_of_birth
+        description: >
+          Year of Birth Data that were manually filled.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_year_of_birth
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+          - name: year_of_birth
+            data_type: STRING
+          - name: accessed_at
+            data_type: STRING
+      - name: office_holding
+        description: >
+          Office Holding (Appointments) Data that were manually filled.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_office_holding
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+          - name: position
+            data_type: STRING
+          - name: from_date
+            data_type: STRING
+          - name: to_date
+            data_type: STRING
+          - name: accessed_at
+            data_type: STRING
