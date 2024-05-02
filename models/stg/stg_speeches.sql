@@ -10,7 +10,7 @@ with
                 case
                     when member_name_original like '%Chairman%'
                     then 'Speaker'
-                    else member_name
+                    else trim(member_name)
                 end as string
             ) as member_name,
             cast(text as string) as text,
