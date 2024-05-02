@@ -5,8 +5,8 @@ with
         select
             {{ adapter.quote("member_name") }} as member_name,
             {{ adapter.quote("constituency") }} as member_constituency,
-            {{ adapter.quote("from_date") }} as effective_from_date,
-            {{ adapter.quote("to_date") }} as effective_to_date,
+            cast({{ adapter.quote("from_date") }} as date) as effective_from_date,
+            cast({{ adapter.quote("to_date") }} as date) as effective_to_date,
             {{ adapter.quote("date_range") }} as date_range  -- for conditional only
 
         from source
@@ -24,6 +24,21 @@ with
         from renamed
     ),
 
+    -- union manually-filled information
+    manual_gsheet as (
+        select member_name, member_constituency, effective_from_date, effective_to_date
+        from {{ ref("stg_gsheet_member_of_parliament") }}
+    ),
+
+    unioned as (
+        select member_name, member_constituency, effective_from_date, effective_to_date
+        from process
+        union all
+        select member_name, member_constituency, effective_from_date, effective_to_date
+        from manual_gsheet
+    ),
+
+    -- post-process
     add_latest_flag as (
         select
             *,
@@ -39,7 +54,7 @@ with
                     effective_to_date
                     = max(effective_to_date) over (partition by member_name)
             end as is_latest_constituency
-        from process
+        from unioned
     )
 select *
 from add_latest_flag
