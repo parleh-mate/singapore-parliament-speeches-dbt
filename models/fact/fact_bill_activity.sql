@@ -83,15 +83,15 @@ with
                 then 'Final Supply (FY 2015) Bill'
                 when
                     title
-                    = 'Economic Expansion Incentives (Relief from Income Tax) (Amendment) Bill'
+                    = 'Economic Expansion Incentives (Relief From Income Tax) (Amendment) Bill'
                 then
-                    'Economic Expansion Incentives (Relief From Income Tax) (Amendment) Bill'
+                    'Economic Expansion Incentives (Relief from Income Tax) (Amendment) Bill'
                 when trim(title) = 'Financial Services and Markets (Amendments) Bill'
                 then 'Financial Services and Markets (Amendment) Bill'
                 when title = 'Good and Services Tax (Amendment) Bill'
                 then 'Goods and Services Tax (Amendment) Bill'
-                when title = 'Housing and Development (Amendment) Bill'
-                then 'Housing and Development Board (Amendment) Bill'
+                when title = 'Housing and Development Board (Amendment) Bill'
+                then 'Housing and Development (Amendment) Bill'
                 when title = 'Income Tax (Amendment) (No 3) Bill'
                 then 'Income Tax (Amendment No 3) Bill'
                 when
@@ -109,6 +109,12 @@ with
                 then 'Supplementary Supply (FY 2019) Bill'
                 when trim(title) = 'Supply BIll'
                 then 'Supply Bill'
+                when title = 'Supplementary Supply (FY2017) Bill'
+                then 'Supplementary Supply (FY 2017) Bill'
+                when title = 'Supplementary Supply (FY2022) Bill'
+                then 'Supplementary Supply (FY 2022) Bill'
+                when title like 'Supplementary Supply (FY2023) Bill%'
+                then 'Supplementary Supply (FY 2023) Bill'
                 when
                     title
                     = 'Tobacco (Control of Advertisements and Sale (Amendment) Bill'

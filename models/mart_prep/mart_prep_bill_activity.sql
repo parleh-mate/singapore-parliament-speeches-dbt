@@ -116,7 +116,14 @@ with
             third_reading_date,
             third_reading_topic
         from complete
+    ),
+
+    clean_amendments as (
+        select
+            * except (title),
+            regexp_replace(title, r'(No)\s(\d)', r'\1. \2') as title
+        from unioned
     )
 
 select *
-from unioned
+from clean_amendments

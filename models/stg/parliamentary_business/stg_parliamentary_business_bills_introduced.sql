@@ -14,6 +14,20 @@ with
             cast({{ adapter.quote("date_passed") }} as date) as passed_date
 
         from source
+    ),
+    cleaned as (
+        select
+            * except (title),
+            case
+                when title = 'Foreign Interference (countermeasures) Bill'
+                then 'Foreign Interference (Countermeasures) Bill'
+                when title = 'Monetary Authority of  Singapore (Amendment) Bill'
+                then 'Monetary Authority of Singapore (Amendment) Bill'
+                when bill_number = '22/2023'
+                then 'Constitution of the Republic of Singapore (Amendment No. 2) Bill'
+                else title
+            end as title
+        from renamed
     )
 select *
-from renamed
+from cleaned
