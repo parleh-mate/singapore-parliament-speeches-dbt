@@ -77,8 +77,13 @@ models:
             combination_of_columns:
               - year
               - title
+            config:
+              where: bill_number is null
 
       columns:
+        - name: bill_number
+          tests:
+            - unique
         - name: year
         - name: first_reading_date
         - name: first_reading_topic
@@ -88,3 +93,6 @@ models:
         - name: day_diff_second_third_reading
         - name: third_reading_date
         - name: third_reading_topic
+        - name: day_diff_third_reading_passed
+        - name: passed_date
+        - name: bill_pdf_link

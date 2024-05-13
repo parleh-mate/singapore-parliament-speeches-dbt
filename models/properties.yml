@@ -32,3 +32,10 @@ sources:
         description: '{{ doc("ml_highest_topics") }}'
       - name: topic_names_19_nmf_20240331
         description: '{{ doc("ml_topic_names") }}'
+
+  - name: parliamentary_business
+    config:
+      enabled: true
+    tables:
+      - name: bills_introduced
+        description: 'From parliament website {{ doc("models_bills") }}'

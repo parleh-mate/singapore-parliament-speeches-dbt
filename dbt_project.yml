@@ -38,6 +38,10 @@ models:
       +materialized: table
       +schema: mart
       +tags: mart
+    mart_prep:
+      +materialized: table
+      +schema: mart_prep
+      +tags: mart_prep
     fact:
       +materialized: table
       +schema: fact
