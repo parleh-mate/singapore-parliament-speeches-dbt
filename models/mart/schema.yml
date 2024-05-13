@@ -77,9 +77,13 @@ models:
             combination_of_columns:
               - year
               - title
+            config:
+              where: bill_number is null
 
       columns:
         - name: bill_number
+          tests:
+            - unique
         - name: year
         - name: first_reading_date
         - name: first_reading_topic
