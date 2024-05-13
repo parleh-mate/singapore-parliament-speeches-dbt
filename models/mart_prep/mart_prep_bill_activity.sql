@@ -3,12 +3,7 @@
 
 with
     bill_activity as (
-        select
-            reading,
-            topic_id,
-            date,
-            title,
-            extract(year from date) as year
+        select reading, topic_id, date, title, extract(year from date) as year
         from {{ ref("fact_bill_activity") }}
     ),
 
