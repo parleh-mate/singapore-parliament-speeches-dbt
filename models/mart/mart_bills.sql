@@ -8,49 +8,7 @@ with
             ba.reading,
             ba.topic_id,
             ba.date,
-            case
-                when ba.title = 'Central Provident Fund (Amendment No.2) Bill'
-                then 'Central Provident Fund (Amendment No 2) Bill'
-                when ba.title = 'Co-operatives Societies (Amendment) Bill'
-                then 'Co-operative Societies (Amendment) Bill'
-                when ba.title = 'Criminal Law (Temporary Provisions) Amendment Bill'
-                then 'Criminal Law (Temporary Provisions) (Amendment) Bill'
-                when ba.title = 'Final Supply (FY2015) Bill'
-                then 'Final Supply (FY 2015) Bill'
-                when
-                    ba.title
-                    = 'Economic Expansion Incentives (Relief from Income Tax) (Amendment) Bill'
-                then
-                    'Economic Expansion Incentives (Relief From Income Tax) (Amendment) Bill'
-                when trim(ba.title) = 'Financial Services and Markets (Amendments) Bill'
-                then 'Financial Services and Markets (Amendment) Bill'
-                when ba.title = 'Good and Services Tax (Amendment) Bill'
-                then 'Goods and Services Tax (Amendment) Bill'
-                when ba.title = 'Housing and Development (Amendment) Bill'
-                then 'Housing and Development Board (Amendment) Bill'
-                when ba.title = 'Income Tax (Amendment) (No 3) Bill'
-                then 'Income Tax (Amendment No 3) Bill'
-                when
-                    ba.title
-                    = 'Motor Vehicles (Third-party Risks and Compensation) (Amendment) Bill'
-                then
-                    'Motor Vehicles (Third-Party Risks and Compensation) (Amendment) Bill'
-                when ba.title = 'Second Supplementary Supply (2021) Bill'
-                then 'Second Supplementary Supply (FY 2021) Bill'
-                when ba.title = 'Statue Law Reform Bill'
-                then 'Statute Law Reform Bill'
-                when ba.title = 'Supplementary Supply (FY2016) Bill'
-                then 'Supplementary Supply (FY 2016) Bill'
-                when ba.title = 'Supplementary Supply (FY2019) Bill'
-                then 'Supplementary Supply (FY 2019) Bill'
-                when trim(ba.title) = 'Supply BIll'
-                then 'Supply Bill'
-                when
-                    ba.title
-                    = 'Tobacco (Control of Advertisements and Sale (Amendment) Bill'
-                then 'Tobacco (Control of Advertisements and Sale) (Amendment) Bill'
-                else trim(ba.title)
-            end as title,
+            ba.title,
             extract(year from ba.date) as year
         from {{ ref("fact_bill_activity") }} as ba
     ),
