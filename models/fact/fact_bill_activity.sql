@@ -70,8 +70,9 @@ with
     ),
 
     clean_title as (
-        select * except(title),
-        case
+        select
+            * except (title),
+            case
                 when title = 'Central Provident Fund (Amendment No.2) Bill'
                 then 'Central Provident Fund (Amendment No 2) Bill'
                 when title = 'Co-operatives Societies (Amendment) Bill'

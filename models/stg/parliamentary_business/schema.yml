@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_parliamentary_business_bills_introduced
+    description: 'From parliament website {{ doc("models_bills") }}'
+    columns:
+      - name: bill_number
+        description: ''
+        tests:
+          - not_null
+          - unique

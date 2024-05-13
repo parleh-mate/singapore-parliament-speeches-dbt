@@ -119,3 +119,23 @@ models:
                 min_value: 0
                 inclusive: false
                 severity: warn
+
+    - name: fact_bills_introduced
+      description: 'From parliament website {{ doc("models_bills") }}'
+      columns:
+        - name: bill_number
+          description: ''
+          tests:
+            - not_null
+            - unique
+        - name: title
+          description: ''
+        - name: first_reading_date
+          description: ''
+        - name: second_reading_date
+          description: ''
+        - name: passed_date
+          description: ''
+        - name: bill_pdf_link
+          description: ''
+
