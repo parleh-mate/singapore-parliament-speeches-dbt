@@ -7,7 +7,13 @@ with
             position,
             department_url,
             ministry_name,
-            cast(_accessed_at as date) as _accessed_at
+            -- first run had some values in 2024-05-06, should be grouped as part of
+            -- 2024-05-07
+            if(
+                cast(_accessed_at as date) = '2024-05-06',
+                '2024-05-07',
+                cast(_accessed_at as date)
+            ) as _accessed_at
         from {{ ref("stg_dir_records_names") }}
         where
             not (
