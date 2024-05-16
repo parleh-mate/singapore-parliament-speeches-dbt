@@ -120,8 +120,7 @@ with
 
     clean_amendments as (
         select
-            * except (title),
-            regexp_replace(title, r'(No)\s(\d)', r'\1. \2') as title
+            * except (title), regexp_replace(title, r'(No)\s(\d)', r'\1. \2') as title
         from unioned
     )
 
