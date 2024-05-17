@@ -94,7 +94,123 @@ with
             appointments
             on speeches.member_name = appointments.member_name
             and speeches.date = appointments.date
+    ),
+
+    -- primary questions are identified by the standard text which looks like:
+    -- 'asked the minister for ...'
+    -- 'to ask the minister for ...'
+    -- 'the following question stood in the name of'
+    -- '
+    primary_question as (
+        select
+            *,
+            case
+                when
+                    topic_type in ('OA', 'WA', 'WANA')
+                    and (
+                        (
+                            -- condition 1: ask
+                            -- note there are a few variations because it varies
+                            lower(substring(speech_text, 1, 100)) like '%asked%'
+                            or lower(substring(speech_text, 1, 100)) like '%to ask%'
+                            or lower(substring(speech_text, 1, 100)) like '%as ked%'
+                        )
+                        and (
+                            -- condition 2: addressee
+                            lower(substring(speech_text, 1, 100)) like '%minister%'
+                            or lower(substring(speech_text, 1, 100))
+                            like '%parliamentary secretary%'
+                        )
+                    )
+                    or (
+                        lower(substring(speech_text, 1, 100))
+                        like '%following question stood in the name%'
+                    )
+                then true
+                else false
+            end as is_primary_question
+        from joined
+    ),
+
+    -- determining which ministry this was addressed to (gets the first few words)
+    extract_minister_for as (
+        select
+            *,
+            if(
+                is_primary_question = true,
+                case
+                    when
+                        not regexp_contains(speech_text, r'Deputy Prime Minister')
+                        and regexp_contains(speech_text, r'Prime Minister')
+                    then 'Prime Minister'
+                    else
+                        regexp_extract(
+                            regexp_replace(speech_text, r'[,();]+', ''),
+                            r'Minister for (\S+(?: \S+){0,6})'
+                        )
+                end,
+                null
+            ) as extracted_words
+        from primary_question
+    ),
+
+    -- extracted words will look something like the regexp_contains expressions
+    extract_ministry as (
+        select
+            * except (extracted_words),
+            case
+                when regexp_contains(extracted_words, r'Communications and Information')
+                then 'Communications and Information'
+                when
+                    regexp_contains(
+                        extracted_words, r'Information Communications and the Arts'
+                    )
+                then 'Information Communications and the Arts'
+                when regexp_contains(extracted_words, r'Culture Community and Youth')
+                then 'Culture Community and Youth'
+                when
+                    regexp_contains(
+                        extracted_words, r'Community Development Youth and Sports'
+                    )
+                then 'Community Development Youth and Sports'
+                when regexp_contains(extracted_words, r'Defence')
+                then 'Defence'
+                when regexp_contains(extracted_words, r'Education')
+                then 'Education'
+                when regexp_contains(extracted_words, r'Finance')
+                then 'Finance'
+                when regexp_contains(extracted_words, r'Foreign Affairs')
+                then 'Foreign Affairs'
+                when regexp_contains(extracted_words, r'Health')
+                then 'Health'
+                when regexp_contains(extracted_words, r'Home Affairs')
+                then 'Home Affairs'
+                when regexp_contains(extracted_words, r'Law')
+                then 'Law'
+                when regexp_contains(extracted_words, r'Manpower')
+                then 'Manpower'
+                when regexp_contains(extracted_words, r'National Development')
+                then 'National Development'
+                when regexp_contains(extracted_words, r'Social and Family Development')
+                then 'Social and Family Development'
+                when
+                    regexp_contains(
+                        extracted_words, r'Sustainability and the Environment'
+                    )
+                then 'Sustainability and the Environment'
+                when
+                    regexp_contains(extracted_words, r'Environment and Water Resources')
+                then 'Environment and Water Resources'
+                when regexp_contains(extracted_words, r'Trade and Industry')
+                then 'Trade and Industry'
+                when regexp_contains(extracted_words, r'Transport')
+                then 'Transport'
+                when regexp_contains(extracted_words, r'Prime Minister')
+                then 'Prime Minister'
+                else null
+            end as ministry_addressed
+        from extract_minister_for
     )
 
 select *
-from joined
+from extract_ministry
