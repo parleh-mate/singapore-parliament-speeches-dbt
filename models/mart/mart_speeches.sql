@@ -213,4 +213,4 @@ with
     )
 
 select *
-from extract_minister_for
+from extract_ministry
