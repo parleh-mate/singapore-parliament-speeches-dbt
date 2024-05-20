@@ -66,3 +66,19 @@ sources:
             data_type: STRING
           - name: accessed_at
             data_type: STRING
+      - name: member_name_mapping
+        description: >
+          Variations of member names which appear in the speeches.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_mapping
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+          - name: possible_variation
+            data_type: STRING
+            tests:
+              - unique

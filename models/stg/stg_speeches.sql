@@ -12,18 +12,8 @@ with
                     then 'Speaker'
                     when member_name like '%Deputy%'
                     then 'Deputy Speaker'
-                    when member_name = 'Alex Yam Ziming'
-                    then 'Alex Yam'
-                    when member_name = 'David Ong Kim Huat'
-                    then 'David Ong'
-                    when member_name = 'Dr Yaacob Ibrahim'
-                    then 'Yaacob Ibrahim'
-                    when member_name = 'Josephine'
-                    then 'Josephine Teo'
-                    when member_name = 'Melvin Yong'
-                    then 'Melvin Yong Yik Chye'
-                    when member_name = 'Mohd Fahmi Bin Aliman'
-                    then 'Mohd Fahmi Aliman'
+                    when member_name like '%Speaker%'
+                    then 'Speaker'
                     else trim(replace(member_name, chr(160), ' '))
                 end as string
             ) as member_name,
@@ -40,32 +30,13 @@ with
     standardise_member_name as (
         select
             * except (member_name),
-            case
-                when member_name = 'Edwin Tong'
-                then 'Edwin Tong Chun Fai'
-                when member_name = 'Pritam'
-                then 'Pritam Singh'
-                when member_name = 'Josephine'
-                then 'Josephine Teo'
-                when member_name = 'Melvin Yong'
-                then 'Melvin Yong Yik Chye'
-                when member_name = 'Depty Speaker'
-                then 'Deputy Speaker'
-                when member_name = 'Leong Wai Mun'
-                then 'Leong Mun Wai'
-                when member_name = 'Mr K Shanmugam'
-                then 'K Shanmugam'
-                when member_name = 'Mr Ong Ye Kung'
-                then 'Ong Ye Kung'
-                when member_name = 'Speaker in the Chair'
-                then 'Speaker'
-                when member_name = 'Foo Mee Har West Coast'
-                then 'Foo Mee Har'
-                when member_name = 'Denise Phua Lay'
-                then 'Denise Phua Lay Peng'
-                else member_name
-            end as member_name
+            -- mapping of names here:
+            -- https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/edit#gid=1498942254
+            coalesce(mapping.member_name, type_cast.member_name) as member_name
         from type_cast
+        left join
+            {{ source("google_sheets", "member_name_mapping") }} as mapping
+            on mapping.possible_variation = type_cast.member_name
     )
 
 select *
