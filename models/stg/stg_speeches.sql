@@ -60,6 +60,7 @@ with
                     when
                         to_hex(cast(member_name as bytes))
                         = '596565204a656e6ec2a04a6f6e67'
+                    then 'Yee Jenn Yong'
                     else trim(member_name)
                 end as string
             ) as member_name,
