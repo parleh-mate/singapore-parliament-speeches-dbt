@@ -24,7 +24,7 @@ with
                     then 'Melvin Yong Yik Chye'
                     when member_name = 'Mohd Fahmi Bin Aliman'
                     then 'Mohd Fahmi Aliman'
-                    else trim(replace(member_name, chr(160), ' ')
+                    else trim(replace(member_name, chr(160), ' '))
                 end as string
             ) as member_name,
             cast(text as string) as text,
