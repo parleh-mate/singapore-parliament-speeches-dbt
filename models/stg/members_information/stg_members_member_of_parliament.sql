@@ -16,7 +16,7 @@ with
         -- if members had served across two or more terms, they should be combined
         select
             member_name,
-            member_constituency,
+            trim(member_constituency) as member_constituency,
             effective_from_date,
             case
                 when lower(date_range) like '%current%' then null else effective_to_date
@@ -26,7 +26,11 @@ with
 
     -- union manually-filled information
     manual_gsheet as (
-        select member_name, member_constituency, effective_from_date, effective_to_date
+        select
+            member_name,
+            trim(member_constituency) as member_constituency,
+            effective_from_date,
+            effective_to_date
         from {{ ref("stg_gsheet_member_of_parliament") }}
     ),
 
