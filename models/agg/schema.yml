@@ -3,3 +3,5 @@ version: 2
 models:
     - name: agg_speech_metrics_by_member
       description: '{{ doc("agg_speech_metrics_by_member") }}'
+    - name: agg_pri_questions_topics_by_member
+      description: '{{ doc("agg_pri_questions_topics_by_member") }}'
