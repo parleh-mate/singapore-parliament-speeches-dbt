@@ -23,9 +23,7 @@ with
     ),
 
     filter_empty_member_name as (
-        select *
-        from standardise_member_name
-        where member_name != ''
+        select * from standardise_member_name where member_name != ''
     )
 
 select *

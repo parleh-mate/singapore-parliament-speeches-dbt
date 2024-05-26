@@ -16,7 +16,7 @@ with
             member_position as constituency,
             effective_from_date,
             coalesce(effective_to_date, current_date()) as effective_to_date
-        from {{ ref('fact_member_positions') }}
+        from {{ ref("fact_member_positions") }}
         where type = 'constituency'
     ),
 
@@ -39,9 +39,12 @@ with
         from attendance
         left join sittings on attendance.date = sittings.date
         left join members on attendance.member_name = members.member_name
-        left join member_constituency
+        left join
+            member_constituency
             on attendance.member_name = member_constituency.member_name
-            and attendance.date between member_constituency.effective_from_date and member_constituency.effective_to_date
+            and attendance.date
+            between member_constituency.effective_from_date
+            and member_constituency.effective_to_date
     )
 
 select *
