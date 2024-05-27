@@ -65,7 +65,7 @@ with
     filter_standardise_names as (
         select *
         from standardise_names
-        where email in (select email from people_only_one_position)
+        where lower(email) in (select (email) from people_only_one_position)
     ),
 
     -- analyses
@@ -79,16 +79,16 @@ with
             department_url,
             ministry_name,
             lag(_accessed_at) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lag_accessed_at,
             lag(position) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lag_position,
             lag(department_url) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lag_department_url,
             lag(ministry_name) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lag_ministry_name,
         from filter_standardise_names
     ),
@@ -213,16 +213,16 @@ with
             department_url,
             ministry_name,
             lead(_accessed_at) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lead_accessed_at,
             lead(position) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lead_position,
             lead(department_url) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lead_department_url,
             lead(ministry_name) over (
-                partition by name, email order by _accessed_at
+                partition by name, lower(email) order by _accessed_at
             ) as lead_ministry_name
         from filter_standardise_names
     ),
