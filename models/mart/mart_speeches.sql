@@ -111,9 +111,9 @@ with
                         (
                             -- condition 1: ask
                             -- note there are a few variations because it varies
-                            lower(substring(speech_text, 1, 100)) like '%asked%'
-                            or lower(substring(speech_text, 1, 100)) like '%to ask%'
-                            or lower(substring(speech_text, 1, 100)) like '%as ked%'
+                            lower(substring(speech_text, 1, 20)) like '%asked%'
+                            or lower(substring(speech_text, 1, 20)) like '%to ask%'
+                            or lower(substring(speech_text, 1, 20)) like '%as ked%'
                         )
                         and (
                             -- condition 2: addressee
