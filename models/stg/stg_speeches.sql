@@ -22,7 +22,7 @@ with
             cast(num_characters as int64) as count_characters,
             cast(num_sentences as int64) as count_sentences,
             cast(num_syllables as int64) as count_syllables,
-            cast date as date) as date
+            cast(date as date) as date
 
         from {{ source("raw", "speeches") }}
     ),
