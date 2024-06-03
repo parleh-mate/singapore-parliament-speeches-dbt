@@ -6,7 +6,11 @@ with
             extract(month from date) as month,
             member_name,
             member_constituency,
-            count(distinct date) as count_sittings_spoken,
+            -- written answers topic_types should not be considered as spoken in the
+            -- session
+            count(
+                distinct case when not topic_type in ('WA', 'WANA') then date end
+            ) as count_sittings_spoken,
             count(distinct topic_id) as count_topics,
             count(*) as count_speeches,
             sum(count_speeches_words) as count_words,

@@ -8,14 +8,10 @@ with
         from source
     ),
     unioned as (
-        select
-            member_name,
-            member_image_link
+        select member_name, member_image_link
         from renamed
         union all
-        select
-            member_name,
-            member_image_link
+        select member_name, member_image_link
         from gsheet
     )
 select *
