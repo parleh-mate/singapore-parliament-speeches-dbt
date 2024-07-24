@@ -57,8 +57,8 @@ models:
           description: '{{ doc("topic_type") }}'
         - name: topic_type_name
           description: '{{ doc("topic_type") }}'
-        - name: is_constitutional
-          description: '{{ doc("is_constitutional") }}'
+        - name: is_topic_constitutional
+          description: '{{ doc("is_topic_constitutional") }}'
         - name: speech_text
           description: '{{ doc("speech_text") }}'
         - name: count_speeches_words

@@ -17,7 +17,7 @@ with
     ),
 
     topics as (
-        select topic_id, title, section_type, section_type_name, is_constitutional
+        select topic_id, title, section_type, section_type_name, is_topic_constitutional
         from {{ ref("dim_topics") }}
     ),
 
@@ -71,7 +71,7 @@ with
             topics.title as topic_title,
             topics.section_type as topic_type,
             topics.section_type_name as topic_type_name,
-            topics.is_constitutional as is_constitutional,
+            topics.is_topic_constitutional as is_topic_constitutional,
 
             -- speech information
             speeches.text as speech_text,
