@@ -12,7 +12,11 @@ with
             count_words,
             count_characters,
             count_sentences,
-            count_syllables
+            count_syllables,
+            is_short_speech,
+            is_long_speech,
+            is_vernacular_speech,
+            vernacular_speech_language,
         from {{ ref("fact_speeches") }}
     ),
 
@@ -85,7 +89,13 @@ with
             speeches.count_words as count_speeches_words,
             speeches.count_characters as count_speeches_characters,
             speeches.count_sentences as count_speeches_sentences,
-            speeches.count_syllables as count_speeches_syllables
+            speeches.count_syllables as count_speeches_syllables,
+
+            -- speech flags
+            speeches.is_short_speech,
+            speeches.is_long_speech,
+            speeches.is_vernacular_speech,
+            speeches.vernacular_speech_language,
 
         from speeches
         left join topics on speeches.topic_id = topics.topic_id

@@ -71,6 +71,14 @@ models:
           description: '{{ doc("count_sentences") }}'
         - name: count_speeches_syllables
           description: '{{ doc("count_syllables") }}'
+        - name: is_short_speech
+          description: '{{ doc("is_short_speech") }}'
+        - name: is_long_speech
+          description: '{{ doc("is_long_speech") }}'
+        - name: is_vernacular_speech
+          description: '{{ doc("is_vernacular_speech") }}'
+        - name: vernacular_speech_language
+          description: '{{ doc("vernacular_speech_language") }}'
 
     - name: mart_bills
       description: '{{ doc("models_bills") }}'
