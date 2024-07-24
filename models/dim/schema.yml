@@ -54,3 +54,5 @@ models:
           description: '{{ doc("topic_group_name") }}'
         - name: is_topic_constitutional
           description: '{{ doc("is_topic_constitutional") }}'
+        - name: is_topic_procedural
+          description: '{{ doc("is_topic_procedural") }}'

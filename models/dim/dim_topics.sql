@@ -52,6 +52,9 @@ with
             -- identify constitutional (bill) changes
             section_type in ("BI", "BP")
             and lower(title) like "%constitution%" as is_topic_constitutional,
+            -- identify purely procedural records (to be excluded from speech count)
+            -- (BI = Bill Introduced, WS = Correction by Written Statements)
+            section_type in ("BI", "WS") as is_topic_procedural
         from joined
     )
 
