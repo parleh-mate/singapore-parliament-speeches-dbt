@@ -119,6 +119,15 @@ models:
                 min_value: 0
                 inclusive: false
                 severity: warn
+        - name: is_short_speech
+          description: '{{ doc("is_short_speech") }}'
+        - name: is_long_speech
+          description: '{{ doc("is_long_speech") }}'
+        - name: is_vernacular_speech
+          description: '{{ doc("is_vernacular_speech") }}'
+        - name: vernacular_speech_language
+          description: '{{ doc("vernacular_speech_language") }}'
+
 
     - name: fact_bills_introduced
       description: 'From parliament website {{ doc("models_bills") }}'
