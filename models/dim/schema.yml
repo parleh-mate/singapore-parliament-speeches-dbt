@@ -52,5 +52,7 @@ models:
                   severity: warn
         - name: topic_group_name
           description: '{{ doc("topic_group_name") }}'
-        - name: is_constitutional
-          description: '{{ doc("is_constitutional") }}'
+        - name: is_topic_constitutional
+          description: '{{ doc("is_topic_constitutional") }}'
+        - name: is_topic_procedural
+          description: '{{ doc("is_topic_procedural") }}'

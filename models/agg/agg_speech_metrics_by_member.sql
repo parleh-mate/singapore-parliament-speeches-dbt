@@ -21,6 +21,8 @@ with
         where
             member_name != ''
             and not lower(member_name) like any ('%deputy%', '%speaker%', '%chairman%')
+            and not is_short_speech
+            and not is_topic_procedural
         group by all
     ),
 

@@ -1,6 +1,6 @@
-{% docs is_constitutional %}
+{% docs is_topic_constitutional %}
 
-'Is Constitutional' is a boolean field indicating whether the topic concerns a constitution amendment.
+'Is Topic Constitutional' is a boolean field indicating whether the topic concerns a constitution amendment.
 
 This applies only if:
 

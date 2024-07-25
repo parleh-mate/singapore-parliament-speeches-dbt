@@ -57,8 +57,10 @@ models:
           description: '{{ doc("topic_type") }}'
         - name: topic_type_name
           description: '{{ doc("topic_type") }}'
-        - name: is_constitutional
-          description: '{{ doc("is_constitutional") }}'
+        - name: is_topic_constitutional
+          description: '{{ doc("is_topic_constitutional") }}'
+        - name: is_topic_procedural
+          description: '{{ doc("is_topic_procedural") }}'
         - name: speech_text
           description: '{{ doc("speech_text") }}'
         - name: count_speeches_words
@@ -69,6 +71,14 @@ models:
           description: '{{ doc("count_sentences") }}'
         - name: count_speeches_syllables
           description: '{{ doc("count_syllables") }}'
+        - name: is_short_speech
+          description: '{{ doc("is_short_speech") }}'
+        - name: is_long_speech
+          description: '{{ doc("is_long_speech") }}'
+        - name: is_vernacular_speech
+          description: '{{ doc("is_vernacular_speech") }}'
+        - name: vernacular_speech_language
+          description: '{{ doc("vernacular_speech_language") }}'
 
     - name: mart_bills
       description: '{{ doc("models_bills") }}'
