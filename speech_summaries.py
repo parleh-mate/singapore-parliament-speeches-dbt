@@ -64,7 +64,7 @@ def get_summaries(speech_dat):
               "gpt-4o-mini"]
     
     speech = speech_dat.speech_text.iloc[0]
-    prompt = "You are a helpful assistant who will help to summarize speechs made in the Singapore parliament. Summaries should be concise, between 2-3 sentences, and be written in the perspective of the speaker. Opinions and arguments should be stated immediately rather than written like 'I believe...', 'I am here to...'."
+    prompt = "You are a helpful assistant who will help to summarize speechs made in the Singapore parliament. Summaries should be short and concise, between 2-3 sentences and ideally less than 60 words, and be written in the perspective of the speaker. Opinions and arguments should be stated immediately rather than written like 'I believe...', 'I am here to...'."
     df_list = []    
     for i in models:
         if "claude" in i:
@@ -150,6 +150,8 @@ schema = [
     {'name': 'est_cost', 'type': 'FLOAT'},                  
     {'name': 'actual_cost', 'type': 'FLOAT'}
 ]
+
+final_df.query('member_name=="Khaw Boon Wan"').speech_summary
 
 pandas_gbq.to_gbq(dataframe = final_df,
                   destination_table = "prod_mart.mart_speeches_summary",
