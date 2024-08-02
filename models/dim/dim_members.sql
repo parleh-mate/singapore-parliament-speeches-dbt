@@ -20,7 +20,7 @@ with
     ethnicity as (
         select member_name, member_ethnicity
         from {{ ref("stg_gsheet_member_ethnicity") }}
-    )
+    ),
 
     full_name as (
         select member_name, member_name_website from {{ ref("stg_members_full_name") }}
