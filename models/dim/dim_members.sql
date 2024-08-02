@@ -17,6 +17,11 @@ with
         from {{ ref("stg_members_year_of_birth") }}
     ),
 
+    ethnicity as (
+        select member_name, member_ethnicity
+        from {{ ref("stg_gsheet_member_ethnicity") }}
+    )
+
     full_name as (
         select member_name, member_name_website from {{ ref("stg_members_full_name") }}
     ),
@@ -62,6 +67,7 @@ with
         select
             agg.member_name,
             birth_year.member_birth_year,
+            ethnicity.member_ethnicity,
             seed.party,
             seed.gender,
             constituency.member_constituency as latest_member_constituency,
@@ -76,6 +82,7 @@ with
         from agg_attendance as agg
         left join seed_member as seed on agg.member_name = seed.member_name
         left join birth_year on agg.member_name = birth_year.member_name
+        left join ethnicity on agg.member_name = ethnicity.member_name
         left join full_name on agg.member_name = full_name.member_name
         left join image on agg.member_name = image.member_name
         left join constituency on agg.member_name = constituency.member_name

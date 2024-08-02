@@ -13,6 +13,8 @@ models:
           description: '{{ doc("member_party") }}'
         - name: gender
           description: '{{ doc("member_gender") }}'
+        - name: member_ethnicity
+          description: '{{ doc("member_ethnicity") }}'
         - name: earliest_sitting
           description: '{{ doc("member_earliest_sitting") }}'
         - name: latest_sitting
