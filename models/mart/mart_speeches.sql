@@ -36,7 +36,9 @@ with
         from {{ ref("fact_sittings") }}
     ),
 
-    members as (select member_name, party, gender, ethnicity from {{ ref("dim_members") }}),
+    members as (
+        select member_name, party, gender, ethnicity from {{ ref("dim_members") }}
+    ),
 
     constituencies as (
         select
