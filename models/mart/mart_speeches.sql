@@ -37,7 +37,8 @@ with
     ),
 
     members as (
-        select member_name, party, gender, ethnicity from {{ ref("dim_members") }}
+        select member_name, party, gender, member_ethnicity
+        from {{ ref("dim_members") }}
     ),
 
     constituencies as (
