@@ -8,7 +8,9 @@ with
 
     sittings as (select date, parliament, session from {{ ref("fact_sittings") }}),
 
-    members as (select member_name, party, gender from {{ ref("dim_members") }}),
+    members as (
+        select member_name, party, gender, ethnicity from {{ ref("dim_members") }}
+    ),
 
     member_constituency as (
         select
@@ -31,6 +33,7 @@ with
             attendance.member_name,
             members.party as member_party,
             members.gender as member_gender,
+            members.member_ethnicity as member_ethnicity,
             member_constituency.constituency as member_constituency,
 
             -- attendance information

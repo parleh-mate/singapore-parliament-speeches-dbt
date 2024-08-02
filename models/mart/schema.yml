@@ -51,6 +51,8 @@ models:
           description: '{{ doc("member_party") }}'
         - name: member_gender
           description: '{{ doc("member_gender") }}'
+        - name: member_ethnicity
+          description: '{{ doc("member_ethnicity") }}'
         - name: topic_title
           description: '{{ doc("topic_title") }}'
         - name: topic_type
