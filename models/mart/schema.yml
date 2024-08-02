@@ -21,6 +21,8 @@ models:
           description: '{{ doc("member_party") }}'
         - name: member_gender
           description: '{{ doc("member_gender") }}'
+        - name: member_ethnicity
+          description: '{{ doc("member_ethnicity") }}'
         - name: is_present
           description: '{{ doc("is_present") }}'
 

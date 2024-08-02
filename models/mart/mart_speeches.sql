@@ -36,7 +36,7 @@ with
         from {{ ref("fact_sittings") }}
     ),
 
-    members as (select member_name, party, gender from {{ ref("dim_members") }}),
+    members as (select member_name, party, gender, ethnicity from {{ ref("dim_members") }}),
 
     constituencies as (
         select
@@ -68,6 +68,7 @@ with
             speeches.member_name,
             members.party as member_party,
             members.gender as member_gender,
+            members.member_ethnicity as member_ethnicity,
             case
                 when members.party = 'NMP'
                 then 'Nominated Member of Parliament'
