@@ -30,6 +30,22 @@ sources:
             data_type: STRING
           - name: accessed_at
             data_type: STRING
+      - name: ethnicity
+        description: >
+          Ethnicity that were manually filled.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_ethnicity
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+          - name: ethnicity
+            data_type: STRING
+          - name: is_ethnicity_certain
+            data_type: STRING
       - name: year_of_birth
         description: >
           Year of Birth Data that were manually filled.
