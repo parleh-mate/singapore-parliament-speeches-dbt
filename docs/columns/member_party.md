@@ -1,6 +1,6 @@
 {% docs member_party %}
 
-'Party' indicates the political party or designation of the member.
+The political party or designation of the member.
 
 | Acronym |                 Party                 |
 | ------- | ------------------------------------- |
