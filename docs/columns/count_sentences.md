@@ -1,5 +1,5 @@
 {% docs count_sentences %}
 
-Count of number of sentences within a given speech. Detected by, for example, periods, question marks, etc.
+Number of sentences within a given speech. These are detected by periods, question marks, exclamation marks.
 
 {% enddocs %}

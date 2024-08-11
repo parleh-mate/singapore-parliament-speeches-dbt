@@ -1,6 +1,6 @@
 {% docs topic_type %}
 
-'Section Type' (or Topic Type) indicates the type of section associated with the topic. This is the acronym.
+Indicates the type of section associated with the topic.
 
 'Section Type Name' indicates the full name of the section.
 
