@@ -17,13 +17,15 @@ This repository contains code for the data modelling which performs downstream m
 
 Please refer to the [dbt Documentation](https://jeremychia.github.io/singapore-parliament-speeches-dbt/#!/overview), which contains information on the columns available and their descriptions. This was created with the help of [this article](https://medium.com/dbt-local-taiwan/host-dbt-documentation-site-with-github-pages-in-5-minutes-7b80e8b62feb).
 
-The main data product(s) intended for use is
+The main data product(s) intended for use is:
 
 | model | description |
 |-------|-------------|
-|mart_attendance|By member, by sitting date, whether the member attended the parliamentary sitting or not. This is supplemented with information about the member and sitting.|
-|mart_speeches|Each row represents one paragraph of text, based on the hansard, during the parliamentary sitting. This text corresponds to a speech (or part of a speech) made by a Member of Parliament on a given topic. This is supplemented with information about the topic, the sitting, and the member.|
-|mart_bills|By bill, shows a summary of the bill's passage through parliament.|
+|[`mart_attendance`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1ssingapore-parliament-speeches!2sprod_mart!3smart_attendance)|By member, by sitting date, whether the member attended the parliamentary sitting or not. This is supplemented with information about the member and sitting.|
+|[`mart_speeches`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1ssingapore-parliament-speeches!2sprod_mart!3smart_speeches)|Each row represents one paragraph of text, based on the hansard, during the parliamentary sitting. This text corresponds to a speech (or part of a speech) made by a Member of Parliament on a given topic. This is supplemented with information about the topic, the sitting, and the member.|
+|[`mart_bills`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1ssingapore-parliament-speeches!2sprod_mart!3smart_bills)|By bill, shows a summary of the bill's passage through parliament.|
+
+Click on the links above to be taken to the models in BigQuery.
 
 An example of how this dataset is being used is in this [Looker Studio dashboard](https://lookerstudio.google.com/s/qYJulld3Ss8) to show overall attendance, bills, and members' speech information..
 
