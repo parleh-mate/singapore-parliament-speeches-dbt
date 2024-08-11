@@ -18,8 +18,27 @@ As a refresher, these are the data products intended for use:
 ### For `mart_attendance`
 
 ```sql
+select *
+from `singapore-parliament-speeches.prod_mart.mart_attendance`
 ```
 
 ### For `mart_speeches`
 
+```sql
+select *
+from `singapore-parliament-speeches.prod_mart.mart_speeches`
+```
+
 ### For `mart_bills`
+
+```sql
+select *
+from `singapore-parliament-speeches.prod_mart.mart_bills`
+```
+
+### For `dim_members`
+
+```sql
+select *
+from `singapore-parliament-speeches.prod_dim.dim_members`
+```
