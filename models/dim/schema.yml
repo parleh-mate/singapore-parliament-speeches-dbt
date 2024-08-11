@@ -23,6 +23,18 @@ models:
           description: '{{ doc("member_count_sittings_present") }}'
         - name: count_sittings_total
           description: '{{ doc("member_count_sittings_total") }}'
+        - name: member_birth_year
+          description: '{{ doc("member_birth_year") }}' 
+        - name: latest_member_constituency
+          description: '{{ doc("member_latest_member_constituency") }}' 
+        - name: latest_member_appointments
+          description: '{{ doc("member_latest_member_appointments") }}' 
+        - name: latest_member_committees
+          description: '{{ doc("member_latest_member_committees") }}' 
+        - name: member_name_website
+          description: '{{ doc("member_name_website") }}' 
+        - name: member_image_link
+          description: '{{ doc("member_image_link") }}' 
 
     - name: dim_topics
       description: '{{ doc("models_topics") }}'
@@ -54,6 +66,8 @@ models:
                   severity: warn
         - name: topic_group_name
           description: '{{ doc("topic_group_name") }}'
+        - name: topic_group_distribution
+          description: '{{ doc("topic_group_distribution") }}' 
         - name: is_topic_constitutional
           description: '{{ doc("is_topic_constitutional") }}'
         - name: is_topic_procedural
