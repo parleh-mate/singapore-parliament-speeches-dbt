@@ -1,7 +1,5 @@
 {% docs is_latest_position %}
 
-In relation to a position, whether it is a latest position.
-For current MPs, this reflects their current appointment (effective to date is null).
-For former MPs, this reflects the latest held appointment before stepping down.
+Boolean value. True if the MP is currently holding this appointment, or if this was the last appointment the MP held before stepping down. False otherwise.
 
 {% enddocs %}

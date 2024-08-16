@@ -1,6 +1,6 @@
 {% docs session %}
 
-'Session' refers to the specific session within the parliamentary term. Each parliamentary term typically has two sessions.
+Specific session within the parliamentary term. Each parliamentary term typically has two sessions.
 
 | Parliament Term | Session |   Start    |    End     |
 | --------------- | ------- | ---------- | ---------- |

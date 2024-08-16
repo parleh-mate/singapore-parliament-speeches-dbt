@@ -1,6 +1,6 @@
 {% docs is_topic_procedural %}
 
-'Is Topic Procedural' is a boolean field indicating whether the topic concerns a procedural statement, and therefore should be considered excluded from the speech count..
+Boolean value. TRUE if topic concerns a procedural statement, and therefore should be considered excluded from the speech count. False otherwise.
 
 This applies only if:
 

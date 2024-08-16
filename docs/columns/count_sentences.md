@@ -1,5 +1,5 @@
 {% docs count_sentences %}
 
-Count of number of sentences within a given speech. Detected by, for example, periods, question marks, etc.
+Number of sentences in a given speech, where sentences are defined as continuous blocks of text ending with periods, question marks, or exclamation marks.
 
 {% enddocs %}

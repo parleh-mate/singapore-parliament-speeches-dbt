@@ -1,6 +1,6 @@
 {% docs parliament %}
 
-'Parliament' denotes the parliamentary term number. Each parliament meeting typically has two sessions.
+Parliamentary term number. Each parliament meeting typically has two sessions.
 
 |                              Parliamentary Term                               | Commencement | Prorogued  |
 | ----------------------------------------------------------------------------- | ------------ | ---------- |

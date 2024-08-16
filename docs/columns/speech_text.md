@@ -1,5 +1,5 @@
 {% docs speech_text %}
 
-'Speech Text' contains the actual content of the speech delivered in the Parliament.
+Contains the raw content of the speech delivered in Parliament.
 
 {% enddocs %}

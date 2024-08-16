@@ -54,6 +54,10 @@ models:
       +materialized: view
       +schema: stg
       +tags: staging
+    agg:
+      +materialized: table
+      +schema: agg
+      +tags: aggregates
 
 seeds:
   +schema: seeds
