@@ -39,12 +39,13 @@ jobs:
         dbt debug
     - name: Deploy dbt docs
       run: |
+        mkdir ./target
         dbt deps
         dbt docs generate
         mkdir dbt-docs
-        cp dbt/target/manifest.json dbt-docs/manifest.json
-        cp dbt/target/catalog.json dbt-docs/catalog.json
-        cp dbt/target/index.html dbt-docs/index.html
+        cp target/manifest.json dbt-docs/manifest.json
+        cp target/catalog.json dbt-docs/catalog.json
+        cp target/index.html dbt-docs/index.html
         ghp-import -n -p -f dbt-docs/
       env:
         DBT_PROJECT_DIR: ./
