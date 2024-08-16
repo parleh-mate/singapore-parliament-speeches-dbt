@@ -33,8 +33,13 @@ jobs:
       shell: bash
       env:
         KEYFILE: ${{secrets.DBT_GOOGLE_BIGQUERY_KEYFILE}}
+    - name: Validate dbt installation
+      run: |
+        dbt --version
+        dbt debug
     - name: Deploy dbt docs
       run: |
+        dbt deps
         dbt docs generate
         mkdir docs
         cp dbt/target/manifest.json docs/manifest.json
