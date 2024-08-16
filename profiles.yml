@@ -9,5 +9,5 @@ default:
       dataset: "{{ env_var('DBT_GOOGLE_BIGQUERY_DATASET') }}"
       threads: 10
       timeout_seconds: 300
-      location: EU
+      location: US
       priority: interactive
