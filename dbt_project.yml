@@ -58,6 +58,10 @@ models:
       +materialized: table
       +schema: agg
       +tags: aggregates
+    dim_prep:
+      +materialized: view
+      +schema: dim_prep
+      +tags: dim_prep
 
 seeds:
   +schema: seeds

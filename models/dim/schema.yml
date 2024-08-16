@@ -25,10 +25,16 @@ models:
           description: '{{ doc("member_count_sittings_total") }}'
         - name: member_birth_year
           description: '{{ doc("member_birth_year") }}' 
+        - name: member_constituencies
+          description: '{{ doc("member_constituency") }}'
         - name: latest_member_constituency
           description: '{{ doc("member_latest_member_constituency") }}' 
+        - name: member_appointments
+          description: '{{ doc("member_appointments") }}' 
         - name: latest_member_appointments
           description: '{{ doc("member_latest_member_appointments") }}' 
+        - name: member_committees
+          description: '{{ doc("member_committees") }}' 
         - name: latest_member_committees
           description: '{{ doc("member_latest_member_committees") }}' 
         - name: member_name_website
