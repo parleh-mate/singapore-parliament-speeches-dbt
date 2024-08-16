@@ -1,0 +1,33 @@
+name: docs
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Deploy dbt docs
+      run: |
+        dbt docs generate
+        mkdir docs
+        cp dbt/target/manifest.json docs/manifest.json
+        cp dbt/target/catalog.json docs/catalog.json
+        cp dbt/target/index.html docs/index.html
+        ghp-import -n -p -f docs/
+      env:
+        DBT_PROJECT_DIR: ./dbt
+        DBT_PROFILES_DIR: ./dbt_profiles
