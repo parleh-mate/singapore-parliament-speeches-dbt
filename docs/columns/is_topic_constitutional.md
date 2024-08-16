@@ -1,6 +1,6 @@
 {% docs is_topic_constitutional %}
 
-TRUE if topic concerns a constitution amendment.
+Boolean value. TRUE if topic concerns a constitution amendment. False otherwise.
 
 This applies only if:
 

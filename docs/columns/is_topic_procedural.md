@@ -1,6 +1,6 @@
 {% docs is_topic_procedural %}
 
-TRUE if topic concerns a procedural statement, and therefore should be considered excluded from the speech count.
+Boolean value. TRUE if topic concerns a procedural statement, and therefore should be considered excluded from the speech count. False otherwise.
 
 This applies only if:
 

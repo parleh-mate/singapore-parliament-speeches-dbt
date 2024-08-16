@@ -1,5 +1,5 @@
 {% docs is_vernacular_speech %}
 
-TRUE if speeches contains phrase "vernacular speech".
+Boolean value. TRUE if speeches contains phrase "vernacular speech". False otherwise.
 
 {% enddocs %}

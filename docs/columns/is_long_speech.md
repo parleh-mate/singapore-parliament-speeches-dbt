@@ -1,6 +1,6 @@
 {% docs is_long_speech %}
 
-TRUE if the word count is at or above the 90th percentile of all speeches.
+Boolean value. TRUE if the word count is at or above the 90th percentile of all speeches. False otherwise.
 
 {% enddocs %}
 
