@@ -42,4 +42,4 @@ jobs:
         cp dbt/target/index.html docs/index.html
         ghp-import -n -p -f docs/
       env:
-        DBT_PROJECT_DIR: ./dbt
+        DBT_PROJECT_DIR: ./
