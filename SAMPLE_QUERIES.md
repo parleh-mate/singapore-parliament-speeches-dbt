@@ -17,9 +17,11 @@ As a refresher, these are the data products intended for use:
 
 ### For `mart_attendance`
 
+To see what attendance of what Worker's Party (WP) MPs were in the month of 2024-05:
 ```sql
-select *
+select date, member_party, member_name, is_present
 from `singapore-parliament-speeches.prod_mart.mart_attendance`
+where date between '2024-05-01' and '2024-05-31' and member_party = 'WP'
 ```
 
 ### For `mart_speeches`
