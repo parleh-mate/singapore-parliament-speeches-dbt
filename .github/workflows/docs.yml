@@ -41,10 +41,10 @@ jobs:
       run: |
         dbt deps
         dbt docs generate
-        mkdir docs
-        cp dbt/target/manifest.json docs/manifest.json
-        cp dbt/target/catalog.json docs/catalog.json
-        cp dbt/target/index.html docs/index.html
-        ghp-import -n -p -f docs/
+        mkdir dbt-docs
+        cp dbt/target/manifest.json dbt-docs/manifest.json
+        cp dbt/target/catalog.json dbt-docs/catalog.json
+        cp dbt/target/index.html dbt-docs/index.html
+        ghp-import -n -p -f dbt-docs/
       env:
         DBT_PROJECT_DIR: ./
