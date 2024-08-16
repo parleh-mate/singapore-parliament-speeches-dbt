@@ -27,7 +27,9 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Copy credentials from secrets
-      run: 'echo "$KEYFILE" > ./.gcloud/dbt-service-account.json'
+      run: |
+        mkdir -p ./.gcloud
+        'echo "$KEYFILE" > ./.gcloud/dbt-service-account.json'
       shell: bash
       env:
         KEYFILE: ${{secrets.DBT_GOOGLE_BIGQUERY_KEYFILE}}
