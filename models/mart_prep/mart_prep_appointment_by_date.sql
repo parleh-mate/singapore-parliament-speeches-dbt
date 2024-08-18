@@ -9,7 +9,7 @@ with
             member_position as appointment,
             effective_from_date,
             coalesce(date(effective_to_date), current_date()) as effective_to_date
-        from {{ ref("fact_member_positions") }}
+        from {{ ref("dim_prep_member_positions") }}
         where type = 'appointment'
     ),
 

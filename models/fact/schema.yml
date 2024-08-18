@@ -34,6 +34,25 @@ models:
         - name: reading
           description: '{{ doc("reading") }}'
 
+    - name: fact_bills_introduced
+      description: 'From parliament website {{ doc("models_bills") }}'
+      columns:
+        - name: bill_number
+          description: '{{ doc("bill_number") }}' 
+          tests:
+            - not_null
+            - unique
+        - name: title
+          description: '{{ doc("topic_title") }}' 
+        - name: first_reading_date
+          description: '{{ doc("bill_first_reading_date") }}' 
+        - name: second_reading_date
+          description: '{{ doc("bill_second_reading_date") }}' 
+        - name: passed_date
+          description: '{{ doc("bill_passed_date") }}' 
+        - name: bill_pdf_link
+          description: '{{ doc("bill_pdf_link") }}' 
+
     - name: fact_member_positions
       description: '{{ doc("models_member_positions") }}'
       columns:
@@ -127,24 +146,3 @@ models:
           description: '{{ doc("is_vernacular_speech") }}'
         - name: vernacular_speech_language
           description: '{{ doc("vernacular_speech_language") }}'
-
-
-    - name: fact_bills_introduced
-      description: 'From parliament website {{ doc("models_bills") }}'
-      columns:
-        - name: bill_number
-          description: ''
-          tests:
-            - not_null
-            - unique
-        - name: title
-          description: ''
-        - name: first_reading_date
-          description: ''
-        - name: second_reading_date
-          description: ''
-        - name: passed_date
-          description: ''
-        - name: bill_pdf_link
-          description: ''
-

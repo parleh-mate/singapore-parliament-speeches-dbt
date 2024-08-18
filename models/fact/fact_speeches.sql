@@ -32,7 +32,7 @@ with
     */
     flag_speech_characteristics as (
         select
-            * except(percentile10_count_words, percentile90_count_words),
+            * except (percentile10_count_words, percentile90_count_words),
             count_words <= percentile10_count_words as is_short_speech,
             count_words >= percentile90_count_words as is_long_speech,
             contains_substr(text, 'vernacular speech') as is_vernacular_speech,

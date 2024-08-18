@@ -11,4 +11,6 @@ Provides detailed information about parliamentary sittings, including the date, 
 | 14              | 1       | 95         | 2020-08-24 | 2023-03-24 |
 | 14              | 2       | 95         | 2023-04-10 | Present    |
 
+Each row represents one sitting.
+
 {% enddocs %}

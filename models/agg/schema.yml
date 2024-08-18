@@ -3,5 +3,51 @@ version: 2
 models:
     - name: agg_speech_metrics_by_member
       description: '{{ doc("agg_speech_metrics_by_member") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: year
+          description: '{{ doc("year") }}' 
+        - name: month
+          description: '{{ doc("month") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: count_sittings_total
+          description: '{{ doc("member_count_sittings_total") }}' 
+        - name: count_sittings_present
+          description: '{{ doc("member_count_sittings_present") }}' 
+        - name: count_sittings_spoken
+          description: '{{ doc("member_count_sittings_spoken") }}' 
+        - name: count_topics
+          description: '{{ doc("member_count_topics") }}' 
+        - name: count_pri_questions
+          description: '{{ doc("member_count_pri_questions") }}' 
+        - name: count_speeches
+          description: '{{ doc("member_count_speeches") }}' 
+        - name: count_words
+          description: '{{ doc("count_words") }}' 
+        - name: count_sentences
+          description: '{{ doc("count_sentences") }}' 
+        - name: count_syllables
+          description: '{{ doc("count_syllables") }}' 
     - name: agg_pri_questions_topics_by_member
       description: '{{ doc("agg_pri_questions_topics_by_member") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: year
+          description: '{{ doc("year") }}' 
+        - name: month
+          description: '{{ doc("month") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: ministry_addressed
+          description: '{{ doc("ministry_addressed") }}' 
+        - name: count_pri_questions
+          description: '{{ doc("member_count_pri_questions") }}' 

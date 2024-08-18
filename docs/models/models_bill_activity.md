@@ -4,4 +4,6 @@ Provides reading (e.g. 'First Reading', 'Second Reading' etc.) activity by bill 
 
 For how the reading (first, second, third) is distinguished, see the column documentation for 'reading'.
 
+Each row represents a bill and corresponding activity.
+
 {% enddocs %}

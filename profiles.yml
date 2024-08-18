@@ -1,0 +1,13 @@
+default:
+  target: bigquery
+  outputs:
+    bigquery:
+      type: bigquery
+      method: service-account
+      keyfile: "{{ env_var('DBT_GOOGLE_BIGQUERY_KEYFILE') }}"
+      project: "{{ env_var('DBT_GOOGLE_PROJECT') }}"
+      dataset: "{{ env_var('DBT_GOOGLE_BIGQUERY_DATASET') }}"
+      threads: 10
+      timeout_seconds: 300
+      location: US
+      priority: interactive

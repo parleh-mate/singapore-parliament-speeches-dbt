@@ -1,5 +1,5 @@
 {% docs effective_from_date %}
 
-In relation to a position, the date from which the appointment is effective from.
+Date which the appointment is effective from. Date format: YYYY-MM-DD
 
 {% enddocs %}
