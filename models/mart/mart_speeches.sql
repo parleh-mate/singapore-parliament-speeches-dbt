@@ -13,8 +13,6 @@ with
             count_characters,
             count_sentences,
             count_syllables,
-            is_short_speech,
-            is_long_speech,
             is_vernacular_speech,
             vernacular_speech_language,
         from {{ ref("fact_speeches") }}
@@ -96,8 +94,6 @@ with
             speeches.count_syllables as count_speeches_syllables,
 
             -- speech flags
-            speeches.is_short_speech,
-            speeches.is_long_speech,
             speeches.is_vernacular_speech,
             speeches.vernacular_speech_language,
 
