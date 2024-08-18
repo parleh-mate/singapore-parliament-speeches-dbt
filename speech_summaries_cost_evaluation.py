@@ -64,7 +64,7 @@ def get_summaries(speech_dat):
               "gpt-4o-mini"]
     
     speech = speech_dat.speech_text.iloc[0]
-    prompt = "You are a helpful assistant who will help to summarize speeches made in the Singapore parliament. Summaries should be short and concise, between 2-3 sentences and ideally less than 60 words, and be written in the perspective of the speaker. Opinions and arguments should be stated immediately rather than written like 'I believe...', 'I am here to...'."
+    prompt = "You are a helpful assistant who will help to summarize speeches made in the Singapore parliament. Summaries should be short and concise, between 3-4 sentences and ideally less than 80 words, and be written in the perspective of the speaker. Opinions and arguments should be stated as is rather than written like 'I believe...', 'I am here to...'. For example, 'Living standards should be raised' is preferred to 'I believe that living standards should be raised'. In addition, I would also like you to label each speech with one of the following topics: []. Some speeches are in response to a parliamentary question directed to a certain ministry. In these cases, the linked ministry will be provided in case it helps you with the labeling. Please use your discretion when using this information, as speeches may digress and may not always pertain to the originally addressed ministry. The summaries should be output in the following format: summary: {insert summary here}, topic: {insert topic here}."
     df_list = []    
     for i in models:
         if "claude" in i:
