@@ -1,4 +1,4 @@
-{% docs topic_ministry_prop %}
+{% docs topic_ministry_proportion %}
 
 The proportion the selected ministry appears within a topic.
 

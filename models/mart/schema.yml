@@ -93,8 +93,8 @@ models:
           description: '{{ doc("ministry_addressed") }}'
         - name: topic_ministry
           description: '{{ doc("topic_ministry") }}' 
-        - name: topic_ministry_prop
-          description: '{{ doc("topic_ministry_prop") }}'
+        - name: topic_ministry_proportion
+          description: '{{ doc("topic_ministry_proportion") }}'
 
     - name: mart_bills
       description: '{{ doc("models_bills") }}'
