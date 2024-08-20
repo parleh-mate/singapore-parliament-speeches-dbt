@@ -228,29 +228,41 @@ with
             end as ministry_addressed
         from extract_minister_for
     ),
-    ministry_counts as (
+
+    agg_ministry_counts_by_topic as (
         select
             topic_id,
             ministry_addressed,
             count(*) as ministry_count,
             rank() over (partition by topic_id order by count(*) desc) as ministry_rank
-        from extract_ministry 
+        from extract_ministry
         group by topic_id, ministry_addressed
     ),
-    majority_ministry as (
-        select 
+
+    get_majority_ministry as (
+        select
             topic_id,
-            ARRAY_AGG(ministry_addressed order by ministry_count desc limit 1)[OFFSET(0)] as topic_ministry,
-            max(ministry_count) / sum(ministry_count) over (partition by topic_id) as topic_ministry_prop
-        from ministry_counts
+            array_agg(ministry_addressed order by ministry_count desc limit 1)[
+                offset(0)
+            ] as topic_ministry,
+            safe_divide(
+                max(ministry_count), sum(ministry_count) over (partition by topic_id)
+            ) as topic_ministry_proportion
+        from agg_ministry_counts_by_topic
         where ministry_rank = 1
         group by topic_id, ministry_count
     ),
-    join_maj_ministry as (
-        select *
+
+    join_majority_ministry_for_topic as (
+        select
+            extract_ministry.*,
+            get_majority_ministry.topic_ministry,
+            get_majority_ministry.topic_ministry_proportion
         from extract_ministry
-        left join majority_ministry on extract_ministry.topic_id = majority_ministry.topic_id
+        left join
+            get_majority_ministry
+            on extract_ministry.topic_id = get_majority_ministry.topic_id
     )
 
 select *
-from join_maj_ministry
+from join_majority_ministry_for_topic
