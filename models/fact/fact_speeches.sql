@@ -21,9 +21,7 @@ with
         1. If the speech was made in vernacular (non-English)
     */
     flag_speech_characteristics as (
-        select
-            *,
-            contains_substr(text, 'vernacular speech') as is_vernacular_speech,
+        select *, contains_substr(text, 'vernacular speech') as is_vernacular_speech,
         from source
     ),
 
