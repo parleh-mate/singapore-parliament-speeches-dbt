@@ -236,32 +236,45 @@ with
             count(*) as ministry_count,
             rank() over (partition by topic_id order by count(*) desc) as ministry_rank
         from extract_ministry
+        where ministry_addressed is not NULL
         group by topic_id, ministry_addressed
     ),
 
     get_majority_ministry as (
         select
             topic_id,
-            array_agg(ministry_addressed order by ministry_count desc limit 1)[
-                offset(0)
-            ] as topic_ministry,
+            ministry_addressed,
+            ministry_rank,
             safe_divide(
-                max(ministry_count), sum(ministry_count) over (partition by topic_id)
+                ministry_count, sum(ministry_count) over (partition by topic_id)
             ) as topic_ministry_proportion
         from agg_ministry_counts_by_topic
-        where ministry_rank = 1
-        group by topic_id, ministry_count
+        group by topic_id, ministry_addressed, ministry_count,ministry_rank
     ),
+    pivot_pri_and_sec_ministry as (
+        select
+            topic_id,
+            max(case when ministry_rank = 1 then ministry_addressed end) as ministry_addressed_primary,
+            max(case when ministry_rank = 1 then topic_ministry_proportion end) as ministry_proportion_primary,
+            max(case when ministry_rank = 2 then ministry_addressed end) as ministry_addressed_secondary,
+            max(case when ministry_rank = 2 then topic_ministry_proportion end) as ministry_proportion_secondary
+        from
+            get_majority_ministry
+        group by
+            topic_id
+        ),
 
     join_majority_ministry_for_topic as (
         select
             extract_ministry.*,
-            get_majority_ministry.topic_ministry,
-            get_majority_ministry.topic_ministry_proportion
+            pivot_pri_and_sec_ministry.ministry_addressed_primary,
+            pivot_pri_and_sec_ministry.ministry_proportion_primary,
+            pivot_pri_and_sec_ministry.ministry_addressed_secondary,
+            pivot_pri_and_sec_ministry.ministry_proportion_secondary
         from extract_ministry
         left join
-            get_majority_ministry
-            on extract_ministry.topic_id = get_majority_ministry.topic_id
+            pivot_pri_and_sec_ministry
+            on extract_ministry.topic_id = pivot_pri_and_sec_ministry.topic_id
     )
 
 select *
