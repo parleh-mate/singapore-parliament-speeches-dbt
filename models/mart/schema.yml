@@ -91,10 +91,14 @@ models:
           description: '{{ doc("is_primary_question") }}' 
         - name: ministry_addressed
           description: '{{ doc("ministry_addressed") }}'
-        - name: topic_ministry
-          description: '{{ doc("topic_ministry") }}' 
-        - name: topic_ministry_proportion
-          description: '{{ doc("topic_ministry_proportion") }}'
+        - name: ministry_addressed_primary
+          description: '{{ doc("ministry_addressed_primary") }}' 
+        - name: ministry_proportion_primary
+          description: '{{ doc("ministry_proportion_primary") }}'
+        - name: ministry_addressed_secondary
+          description: '{{ doc("ministry_addressed_secondary") }}' 
+        - name: ministry_proportion_secondary
+          description: '{{ doc("ministry_proportion_secondary") }}'
 
     - name: mart_bills
       description: '{{ doc("models_bills") }}'
