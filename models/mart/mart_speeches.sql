@@ -13,8 +13,6 @@ with
             count_characters,
             count_sentences,
             count_syllables,
-            is_short_speech,
-            is_long_speech,
             is_vernacular_speech,
             vernacular_speech_language,
         from {{ ref("fact_speeches") }}
@@ -96,8 +94,6 @@ with
             speeches.count_syllables as count_speeches_syllables,
 
             -- speech flags
-            speeches.is_short_speech,
-            speeches.is_long_speech,
             speeches.is_vernacular_speech,
             speeches.vernacular_speech_language,
 
@@ -231,7 +227,55 @@ with
                 else null
             end as ministry_addressed
         from extract_minister_for
+    ),
+
+    agg_ministry_counts_by_topic as (
+        select
+            topic_id,
+            ministry_addressed,
+            count(*) as ministry_count,
+            rank() over (partition by topic_id order by count(*) desc) as ministry_rank
+        from extract_ministry
+        where ministry_addressed is not NULL
+        group by topic_id, ministry_addressed
+    ),
+
+    get_majority_ministry as (
+        select
+            topic_id,
+            ministry_addressed,
+            ministry_rank,
+            safe_divide(
+                ministry_count, sum(ministry_count) over (partition by topic_id)
+            ) as topic_ministry_proportion
+        from agg_ministry_counts_by_topic
+        group by topic_id, ministry_addressed, ministry_count,ministry_rank
+    ),
+    pivot_pri_and_sec_ministry as (
+        select
+            topic_id,
+            max(case when ministry_rank = 1 then ministry_addressed end) as ministry_addressed_primary,
+            max(case when ministry_rank = 1 then topic_ministry_proportion end) as ministry_proportion_primary,
+            max(case when ministry_rank = 2 then ministry_addressed end) as ministry_addressed_secondary,
+            max(case when ministry_rank = 2 then topic_ministry_proportion end) as ministry_proportion_secondary
+        from
+            get_majority_ministry
+        group by
+            topic_id
+        ),
+
+    join_majority_ministry_for_topic as (
+        select
+            extract_ministry.*,
+            pivot_pri_and_sec_ministry.ministry_addressed_primary,
+            pivot_pri_and_sec_ministry.ministry_proportion_primary,
+            pivot_pri_and_sec_ministry.ministry_addressed_secondary,
+            pivot_pri_and_sec_ministry.ministry_proportion_secondary
+        from extract_ministry
+        left join
+            pivot_pri_and_sec_ministry
+            on extract_ministry.topic_id = pivot_pri_and_sec_ministry.topic_id
     )
 
 select *
-from extract_ministry
+from join_majority_ministry_for_topic

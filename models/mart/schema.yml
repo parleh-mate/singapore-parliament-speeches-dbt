@@ -77,10 +77,6 @@ models:
           description: '{{ doc("count_sentences") }}'
         - name: count_speeches_syllables
           description: '{{ doc("count_syllables") }}'
-        - name: is_short_speech
-          description: '{{ doc("is_short_speech") }}'
-        - name: is_long_speech
-          description: '{{ doc("is_long_speech") }}'
         - name: is_vernacular_speech
           description: '{{ doc("is_vernacular_speech") }}'
         - name: vernacular_speech_language
@@ -94,7 +90,15 @@ models:
         - name: is_primary_question
           description: '{{ doc("is_primary_question") }}' 
         - name: ministry_addressed
-          description: '{{ doc("ministry_addressed") }}' 
+          description: '{{ doc("ministry_addressed") }}'
+        - name: ministry_addressed_primary
+          description: '{{ doc("ministry_addressed_primary") }}' 
+        - name: ministry_proportion_primary
+          description: '{{ doc("ministry_proportion_primary") }}'
+        - name: ministry_addressed_secondary
+          description: '{{ doc("ministry_addressed_secondary") }}' 
+        - name: ministry_proportion_secondary
+          description: '{{ doc("ministry_proportion_secondary") }}'
 
     - name: mart_bills
       description: '{{ doc("models_bills") }}'
