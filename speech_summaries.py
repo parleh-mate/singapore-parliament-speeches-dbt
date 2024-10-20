@@ -65,6 +65,7 @@ while True:
             
             speech_summaries = pd.DataFrame(data, columns=['speech_id', 'speech_summary', 'topic_assigned'])
             speech_summaries['batch_id'] = batch_id
+            speech_summaries['gpt_batch_id'] = gpt_batch_id
 
             # now create or append to new table and change executing rows
 
@@ -118,6 +119,7 @@ while True:
 
     upper_bound = 2000
     lower_bound = 70
+    batch_size = 1000
 
     job = gbq_client.query(f"""
                         SELECT  *
@@ -129,6 +131,7 @@ while True:
                         AND count_speeches_words>{lower_bound}
                         AND member_name != ''
                         AND member_name != 'Speaker'
+                        LIMIT {batch_size}
                         """)
 
     result = job.result()
@@ -149,8 +152,7 @@ while True:
 
     word_limit = 150
 
-    system_message = f"""
-    You will be provided with a speech from the Singapore parliament. You are a helpful assistant who will summarize this speech in no more than ~{word_limit} words and label it with a topic. 
+    system_message = f"""You will be provided with a speech from the Singapore parliament. You are a helpful assistant who will summarize this speech in no more than ~{word_limit} words and label it with a topic. 
     """
 
     output_summary_description = f"""A concise summary of the speech of no more than {word_limit} words. Sometimes speeches are long and unsubstantive. I will provide a step-by-step process to guide your summarization:
@@ -167,9 +169,9 @@ while True:
 
     1. Use concise language, avoiding tautology. 
 
-    2. Avoid third-person references like 'the speaker/speech emphasized...'. For example, 'We need to support SMEs during pandemic recovery' is preferred to 'The speech emphasizes the need to support SMEs during pandemic recovery'.
+    2. Write in the present tense passive voice like you would an objective report, avoiding pronouns if possible. For example, 'Singapore has longstanding partnerships with China' is preferred to 'I highlight Singapore's longstanding partnerships with China'.
 
-    3. Write in the present tense spoken voice as if you are the one giving the speech in real time. For example, 'Singapore has longstanding partnerships with China' is preferred to 'I highlight Singapore's longstanding partnerships with China'.
+    3. If you have to use pronouns, strictly avoid using the first-person and write in the third-person instead. For example, 'The speaker/speech emphasizes the need to support SMEs during pandemic recovery' is preferred to 'We need to support SMEs during pandemic recovery'.
 
     4. Do not expand acronyms, just leave them as they are.
     """
@@ -184,7 +186,7 @@ while True:
     model = "gpt-4o-mini"
 
     json_list = []
-    for ind,row in df[:1000].iterrows():
+    for ind,row in df.iterrows():
 
         ministries = [i for i in row.filter(['ministry_addressed_primary', 
                                                             'ministry_addressed_secondary']) if i is not None]
