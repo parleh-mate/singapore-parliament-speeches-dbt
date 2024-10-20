@@ -24,7 +24,20 @@ with
 
     filter_empty_member_name as (
         select * from standardise_member_name where member_name != ''
+    ),
+
+    filter_non_present_members as (
+        select *
+        from filter_empty_member_name
+        where
+            not (
+                -- 13th parliament
+                (date between '2016-01-15' and '2020-06-23')
+                -- lee li lian was offered NMP but did not take it up
+                -- parliament records her as an absent MP
+                and lower(member_name) = 'lee li lian'
+            )
     )
 
 select *
-from filter_empty_member_name
+from filter_non_present_members
