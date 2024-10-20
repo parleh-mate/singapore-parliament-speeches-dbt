@@ -33,7 +33,7 @@ with
             not (
                 -- 13th parliament
                 (date between '2016-01-15' and '2020-06-23')
-                -- lee li lian was offered NMP but did not take it up
+                -- lee li lian was offered NCMP but did not take it up
                 -- parliament records her as an absent MP
                 and lower(member_name) = 'lee li lian'
             )
