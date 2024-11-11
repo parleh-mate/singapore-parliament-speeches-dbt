@@ -1,8 +1,8 @@
 version: 2
 
 models:
-    - name: by_member_metrics
-      description: '{{ doc("by_member_metrics") }}'
+    - name: dash_by_member_metrics
+      description: '{{ doc("models_dash_by_member_metrics") }}'
       columns:
         - name: parliament
           description: '{{ doc("parliament") }}' 
@@ -24,3 +24,57 @@ models:
           description: '{{ doc("attendance") }}' 
         - name: participation
           description: '{{ doc("participation") }}'
+    - name: demographics
+      description: '{{ doc("models_dash_demographics") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: member_ethnicity
+          description: '{{ doc("member_ethnicity") }}' 
+        - name: member_birth_year
+          description: '{{ doc("member_birth_year") }}' 
+        - name: gender
+          description: '{{ doc("gender") }}' 
+        - name: year_age_entered
+          description: '{{ doc("year_age_entered") }}'
+    - name: topics
+      description: '{{ doc("models_dash_topics") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: topic_assigned
+          description: '{{ doc("topic_assigned") }}' 
+        - name: count_topic_speeches
+          description: '{{ doc("count_topic_speeches") }}'
+    - name: questions
+      description: '{{ doc("models_dash_questions") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}'
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: topic_assigned
+          description: '{{ doc("ministry_addressed") }}' 
+        - name: count_topic_speeches
+          description: '{{ doc("count_questions_ministry") }}'
+    - name: speech_lengths
+      description: '{{ doc("models_dash_speech_lengths") }}'
+      columns:
+        - name: count_speeches_words
+          description: '{{ doc("count_speeches_words") }}' 
