@@ -1,0 +1,26 @@
+version: 2
+
+models:
+    - name: by_member_metrics
+      description: '{{ doc("by_member_metrics") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: questions_per_sitting
+          description: '{{ doc("questions_per_sitting") }}' 
+        - name: words_per_speech
+          description: '{{ doc("words_per_speech") }}' 
+        - name: speeches_per_sitting
+          description: '{{ doc("speeches_per_sitting") }}' 
+        - name: readability_score
+          description: '{{ doc("readability_score") }}' 
+        - name: attendance
+          description: '{{ doc("attendance") }}' 
+        - name: participation
+          description: '{{ doc("participation") }}'
