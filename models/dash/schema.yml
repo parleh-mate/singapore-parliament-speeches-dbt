@@ -1,0 +1,101 @@
+version: 2
+
+models:
+    - name: dash_by_member_metrics
+      description: '{{ doc("models_dash_by_member_metrics") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: questions_per_sitting
+          description: '{{ doc("questions_per_sitting") }}' 
+        - name: words_per_speech
+          description: '{{ doc("words_per_speech") }}' 
+        - name: speeches_per_sitting
+          description: '{{ doc("speeches_per_sitting") }}' 
+        - name: readability_score
+          description: '{{ doc("readability_score") }}' 
+        - name: attendance
+          description: '{{ doc("attendance") }}' 
+        - name: participation
+          description: '{{ doc("participation") }}'
+    - name: dash_demographics
+      description: '{{ doc("models_dash_demographics") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: member_ethnicity
+          description: '{{ doc("member_ethnicity") }}' 
+        - name: member_birth_year
+          description: '{{ doc("member_birth_year") }}' 
+        - name: gender
+          description: '{{ doc("gender") }}' 
+        - name: year_age_entered
+          description: '{{ doc("year_age_entered") }}'
+    - name: dash_topics
+      description: '{{ doc("models_dash_topics") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}' 
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: topic_assigned
+          description: '{{ doc("topic_assigned") }}' 
+        - name: count_topic_speeches
+          description: '{{ doc("count_topic_speeches") }}'
+    - name: dash_questions
+      description: '{{ doc("models_dash_questions") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}'
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: topic_assigned
+          description: '{{ doc("topic_assigned") }}' 
+        - name: count_topic_speeches
+          description: '{{ doc("count_topic_speeches") }}'
+    - name: dash_speech_lengths
+      description: '{{ doc("models_dash_speech_lengths") }}'
+      columns:
+        - name: count_speeches_words
+          description: '{{ doc("count_words") }}' 
+    - name: dash_speech_table
+      description: '{{ doc("models_dash_speech_table") }}'
+      columns:
+        - name: parliament
+          description: '{{ doc("parliament") }}' 
+        - name: date
+          description: '{{ doc("date") }}' 
+        - name: member_name
+          description: '{{ doc("member_name") }}' 
+        - name: member_party
+          description: '{{ doc("member_party") }}'
+        - name: member_constituency
+          description: '{{ doc("member_constituency") }}' 
+        - name: speech_summary
+          description: '{{ doc("speech_summary") }}' 
+        - name: topic_assigned
+          description: '{{ doc("topic_assigned") }}' 
+        - name: topic_title
+          description: '{{ doc("topic_title") }}' 
+        - name: topic_engagements
+          description: '{{ doc("topic_engagements") }}' 
