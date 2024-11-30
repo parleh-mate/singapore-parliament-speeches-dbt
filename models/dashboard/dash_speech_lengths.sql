@@ -1,9 +1,12 @@
-with speech_lengths as (SELECT count_speeches_words
-FROM `singapore-parliament-speeches.prod_mart.mart_speeches`
-WHERE topic_type_name not like "%Correction by Written Statements%"
-AND topic_type_name not like "%Bill Introduced%"
-AND member_name != ''
-AND member_name != 'Speaker'
-)
+with
+    speech_lengths as (
+        select count_speeches_words
+        from `singapore-parliament-speeches.prod_mart.mart_speeches`
+        where
+            topic_type_name not like "%Correction by Written Statements%"
+            and topic_type_name not like "%Bill Introduced%"
+            and member_name != ''
+            and member_name != 'Speaker'
+    )
 select *
 from speech_lengths

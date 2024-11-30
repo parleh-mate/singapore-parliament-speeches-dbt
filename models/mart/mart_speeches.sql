@@ -236,7 +236,7 @@ with
             count(*) as ministry_count,
             rank() over (partition by topic_id order by count(*) desc) as ministry_rank
         from extract_ministry
-        where ministry_addressed is not NULL
+        where ministry_addressed is not null
         group by topic_id, ministry_addressed
     ),
 
@@ -249,20 +249,26 @@ with
                 ministry_count, sum(ministry_count) over (partition by topic_id)
             ) as topic_ministry_proportion
         from agg_ministry_counts_by_topic
-        group by topic_id, ministry_addressed, ministry_count,ministry_rank
+        group by topic_id, ministry_addressed, ministry_count, ministry_rank
     ),
     pivot_pri_and_sec_ministry as (
         select
             topic_id,
-            max(case when ministry_rank = 1 then ministry_addressed end) as ministry_addressed_primary,
-            max(case when ministry_rank = 1 then topic_ministry_proportion end) as ministry_proportion_primary,
-            max(case when ministry_rank = 2 then ministry_addressed end) as ministry_addressed_secondary,
-            max(case when ministry_rank = 2 then topic_ministry_proportion end) as ministry_proportion_secondary
-        from
-            get_majority_ministry
-        group by
-            topic_id
-        ),
+            max(
+                case when ministry_rank = 1 then ministry_addressed end
+            ) as ministry_addressed_primary,
+            max(
+                case when ministry_rank = 1 then topic_ministry_proportion end
+            ) as ministry_proportion_primary,
+            max(
+                case when ministry_rank = 2 then ministry_addressed end
+            ) as ministry_addressed_secondary,
+            max(
+                case when ministry_rank = 2 then topic_ministry_proportion end
+            ) as ministry_proportion_secondary
+        from get_majority_ministry
+        group by topic_id
+    ),
 
     join_majority_ministry_for_topic as (
         select
