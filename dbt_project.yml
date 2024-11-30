@@ -34,6 +34,10 @@ models:
     +persist_docs:
       relation: true
       columns: true
+    dashboard:
+      +materialized: table
+      +schema: dashboard
+      +tags: dashboard
     mart:
       +materialized: table
       +schema: mart
