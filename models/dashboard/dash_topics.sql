@@ -7,15 +7,15 @@ with
             b.member_constituency,
             member_name,
             topic_assigned
-        from `singapore-parliament-speeches.prod_mart.mart_speech_topics`
+        from `singapore-parliament-speeches.prod_mart.mart_speech_topics` --anti-pattern, needs to be refactored
         left join
-            (select * from `singapore-parliament-speeches.prod_mart.mart_speeches`) as a
+            (select * from {{ ref("mart_speeches") }}) as a
         left join
             (
                 select distinct
                     member_name, member_party, parliament, member_constituency
                 from
-                    `singapore-parliament-speeches.prod_agg.agg_speech_metrics_by_member`
+                    {{ ref("agg_speech_metrics_by_member") }}
             ) as b using (member_name, member_party, parliament) using (speech_id)
         where b.member_constituency is not null
     ),

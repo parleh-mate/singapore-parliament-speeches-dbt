@@ -9,7 +9,7 @@ with
             gender,
             member_birth_year,
             extract(year from first_parl_date) - member_birth_year as year_age_entered
-        from `singapore-parliament-speeches.prod_dim.dim_members`
+        from {{ ref("dim_members") }}
         left join
             (
                 select
@@ -17,7 +17,7 @@ with
                     parliament,
                     member_constituency,
                     min(`date`) as first_parl_date
-                from `singapore-parliament-speeches.prod_mart.mart_attendance`
+                from {{ ref("mart_attendance") }}
                 where member_constituency is not null
                 group by member_name, parliament, member_constituency
             ) using (member_name)

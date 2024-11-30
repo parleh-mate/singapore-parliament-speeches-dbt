@@ -7,7 +7,7 @@ with
             member_party,
             ministry_addressed,
             count(*) as count_questions_ministry
-        from `singapore-parliament-speeches.prod_mart.mart_speeches`
+        from {{ ref("mart_speeches") }}
         where
             is_primary_question
             and member_party is not null
@@ -27,7 +27,7 @@ with
             member_party,
             ministry_addressed,
             count(*) as count_questions_ministry
-        from `singapore-parliament-speeches.prod_mart.mart_speeches`
+        from {{ ref("mart_speeches") }}
         where
             is_primary_question
             and member_party is not null

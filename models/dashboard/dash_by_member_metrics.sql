@@ -1,7 +1,7 @@
 with
     cte_speeches as (
         select *, count_speeches - count_pri_questions as count_only_speeches
-        from `singapore-parliament-speeches.prod_agg.agg_speech_metrics_by_member`
+        from {{ ref("agg_speech_metrics_by_member") }}
     ),
     cte_readability as (
         select
@@ -11,7 +11,7 @@ with
             - 1.015 * (count_speeches_words / count_speeches_sentences)
             - 84.6
             * (count_speeches_syllables / count_speeches_words) as readability_score
-        from `singapore-parliament-speeches.prod_mart.mart_speeches`
+        from {{ ref("mart_speeches") }}
         where
             not is_vernacular_speech
             and not is_primary_question
@@ -126,7 +126,7 @@ with
             sum(count_sittings_total) as sittings_total,
             sum(count_sittings_present) as sittings_present,
             sum(count_sittings_spoken) as sittings_spoken
-        from `singapore-parliament-speeches.prod_agg.agg_speech_metrics_by_member`
+        from {{ ref("agg_speech_metrics_by_member") }}
         group by member_name, parliament, member_party, member_constituency
     ),
     all_parl as (
@@ -138,7 +138,7 @@ with
             sum(count_sittings_total) as sittings_total,
             sum(count_sittings_present) as sittings_present,
             sum(count_sittings_spoken) as sittings_spoken
-        from `singapore-parliament-speeches.prod_agg.agg_speech_metrics_by_member`
+        from {{ ref("agg_speech_metrics_by_member") }}
         group by member_name, member_party
     ),
     participation as (
