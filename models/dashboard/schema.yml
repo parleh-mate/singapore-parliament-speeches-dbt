@@ -77,25 +77,4 @@ models:
       description: '{{ doc("models_dash_speech_lengths") }}'
       columns:
         - name: count_speeches_words
-          description: '{{ doc("count_words") }}' 
-    - name: dash_speech_table
-      description: '{{ doc("models_dash_speech_table") }}'
-      columns:
-        - name: parliament
-          description: '{{ doc("parliament") }}' 
-        - name: date
-          description: '{{ doc("date") }}' 
-        - name: member_name
-          description: '{{ doc("member_name") }}' 
-        - name: member_party
-          description: '{{ doc("member_party") }}'
-        - name: member_constituency
-          description: '{{ doc("member_constituency") }}' 
-        - name: speech_summary
-          description: '{{ doc("speech_summary") }}' 
-        - name: topic_assigned
-          description: '{{ doc("topic_assigned") }}' 
-        - name: topic_title
-          description: '{{ doc("topic_title") }}' 
-        - name: topic_engagements
-          description: '{{ doc("topic_engagements") }}' 
+          description: '{{ doc("count_words") }}'

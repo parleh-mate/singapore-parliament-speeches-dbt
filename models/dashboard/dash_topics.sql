@@ -7,7 +7,7 @@ with
             b.member_constituency,
             member_name,
             topic_assigned
-        from `singapore-parliament-speeches.prod_mart.mart_speech_topics` --anti-pattern, needs to be refactored
+        from `singapore-parliament-speeches.prod_mart.mart_speech_positions` --anti-pattern, needs to be refactored
         left join
             (select * from {{ ref("mart_speeches") }}) as a
         left join
