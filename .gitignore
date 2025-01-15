@@ -166,3 +166,5 @@ dbt_packages/
 logs/
 profiles.yml
 # end dbt Cloud content
+
+token/
