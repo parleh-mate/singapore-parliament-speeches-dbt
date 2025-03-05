@@ -68,6 +68,9 @@ jobs:
     - name: Copy index.html to dbt docs
       run: cp target/index.html dbt-docs/index.html
 
+    - name: Install ghp-import
+      run: pip install ghp-import
+
     - name: Deploy dbt docs to GitHub Pages
       run: ghp-import -n -p -f dbt-docs/
       env:
