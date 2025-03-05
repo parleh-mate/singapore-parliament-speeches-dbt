@@ -48,8 +48,8 @@ Before running the dbt project locally, ensure you have the following:
 
 ### 1. Clone the Repository  
 ```sh
-git clone <your-repo-url>
-cd <your-dbt-project>
+git clone parleh-mate/singapore-parliament-speeches-dbt
+cd singapore-parliament-speeches-dbt
 ```
 
 ### 2. Install Dependencies
