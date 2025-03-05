@@ -34,7 +34,38 @@ The services used in this repository are:
 
 # How to contribute
 
-If you are interested to contribute, please reach out to jeremyjchia@gmail.com. 
+If you are interested to contribute, please reach out to jeremyjchia@gmail.com.
+
+# Running Locally
+
+## Prerequisites  
+Before running the dbt project locally, ensure you have the following:  
+
+- [Poetry](https://python-poetry.org/docs/#installation) installed. Poetry is a dependency and package manager for Python.  
+- A configured `profiles.yml` file with the necessary database connection (e.g., Postgres, Snowflake, BigQuery, etc.). Please reach out for the profiles.yml file.
+
+## Setup and Running the dbt Project  
+
+### 1. Clone the Repository  
+```sh
+git clone <your-repo-url>
+cd <your-dbt-project>
+```
+
+### 2. Install Dependencies
+```sh
+poetry install
+```
+### 3. Activate the Virtual Environment
+```sh
+poetry shell
+```
+
+### 4. Verify dbt Installation and Check Database Connection
+```sh
+dbt --version;
+dbt debug
+```
 
 # References
 * *Dritsa, K., Thoma, A., Pavlopoulos, I., & Louridas, P. (2022). A Greek Parliament Proceedings Dataset for Computational Linguistics and Political Analysis. Advances in Neural Information Processing Systems, 35, 28874-28888.*
