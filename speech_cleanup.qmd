@@ -1,0 +1,120 @@
+```{python}
+import pandas_gbq
+import os
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import re
+```
+
+```{python}
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "token/gcp_token.json"
+
+df = pandas_gbq.read_gbq("""
+                    SELECT  *
+                    FROM `singapore-parliament-speeches.prod_mart.mart_speeches`
+                         WHERE member_name != ''
+                         AND member_name != 'Speaker'
+                         AND is_primary_question = false
+                    """)
+```
+
+```{python}
+[i for i in df.query('count_speeches_words<50').speech_text]
+
+```
+
+Some visuals, most speeches are within 2000 words with serious outliers
+
+```{python}
+sns.histplot(x = 'count_speeches_words', data = df)
+```
+
+What types of speeches?
+
+```{python}
+
+sns.histplot(y = 'topic_type_name', data = df)
+
+```
+
+What do short speeches look like?
+
+```{python}
+perc_10 = np.percentile(df.count_speeches_words, 10)
+[i for i in df.query(f'count_speeches_words<{perc_10}').speech_text]
+
+```
+
+What do different types of speeches look like?
+
+```{python}
+
+[i for i in df.query('topic_type_name.str.contains("Bill Introduced")').speech_text]
+
+[i for i in df.query('topic_type_name.str.contains("Correction by Written Statements")').speech_text]
+
+```
+
+Some patterns revealed
+1. Many procedural points - 'Yes please', 'Aye', 'last qns', etc. These are all very short and by speaker
+2. empty open brackets
+3. responses to speaker - 'thank you', etc.
+4. there are questions, end with ? and not classified as qns
+5. there are a number of vernacular speeches 
+6. We can omit bill introductions - these are procedural and serves merely to introduce the speech
+7. We can also omit written corrections. These are corrections circulated to correct factual errors in previous speeches.
+8. Both of these constitute only a very small proportion of total speeches
+
+Procedural speeches don't have a particular logic to them and it is tedious to catch them all. Maybe a better way would be to remove all speeches below a certain length.
+Say we assume that a speech is 140 words per minute, we exclude all speeches that are less than half a minute in length, so 70.
+
+In addition we only include speeches within the 95th percentile to remove large outliers
+
+# Clean data
+
+## remove bill introduction and written corrections, then 
+```{python}
+
+reduced_df = df.query('~topic_type_name.str.contains(r"Bill Introduced|Correction by Written Statements")')
+
+```
+
+## cut dataset down by 95 %tile and more than half a min long
+```{python}
+perc_95 = np.percentile(reduced_df.count_speeches_words, 95)
+
+filtered_df = reduced_df.query(f'count_speeches_words<{perc_95} and count_speeches_words>70')
+
+```
+
+## now label vernacular speeches
+
+```{python}
+
+filtered_df = filtered_df.assign(is_vernacular = lambda x: x.speech_text.str.contains("Vernacular Speech"))
+
+def extract_language(text):
+    match = re.search(r"In (Malay|Mandarin|Tamil)", text)
+    return match.group(1) if match else None
+
+filtered_df['vernacular_lang'] = filtered_df['speech_text'].apply(extract_language)
+
+filtered_df['vernacular_lang'] = np.where(filtered_df['is_vernacular'], filtered_df['vernacular_lang'], None)
+
+```
+
+How much do we exclude? We get about 70% of speeches.
+
+```{python}
+
+len(filtered_df)/len(reduced_df)
+
+```
+
+```{python}
+
+filtered_df.head()
+
+```
