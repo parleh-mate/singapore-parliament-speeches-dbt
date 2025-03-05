@@ -18,10 +18,10 @@ with
                 end as string
             ) as member_name,
             cast(text as string) as text,
-            cast(num_words as int64) as count_words,
+            if(cast(num_characters as int64) != 0, cast(num_words as int64), 0) as count_words,
             cast(num_characters as int64) as count_characters,
-            cast(num_sentences as int64) as count_sentences,
-            cast(num_syllables as int64) as count_syllables,
+            if(cast(num_characters as int64) != 0, cast(num_sentences as int64), 0) as count_sentences,
+            if(cast(num_characters as int64) != 0, cast(num_syllables as int64), 0) as count_syllables,
             cast(date as date) as date
 
         from {{ source("raw", "speeches") }}

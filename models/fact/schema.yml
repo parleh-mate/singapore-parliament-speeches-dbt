@@ -76,8 +76,9 @@ models:
       description: '{{ doc("models_speeches") }}'
       tests:
         - dbt_utils.expression_is_true:
-            expression: "count_characters > count_words"
+            expression: "count_characters >= count_words"
             severity: warn
+            where: count_characters != 0
       columns:
         - name: speech_id
           description: '{{ doc("speech_id") }}'
@@ -101,13 +102,9 @@ models:
                 min_value: 0
                 inclusive: false
                 severity: warn
+                where: count_characters != 0
         - name: count_characters
           description: '{{ doc("count_characters") }}'
-          tests:
-            - dbt_utils.accepted_range:
-                min_value: 0
-                inclusive: false
-                severity: warn
         - name: count_sentences
           description: '{{ doc("count_sentences") }}'
           tests:
@@ -115,6 +112,7 @@ models:
                 min_value: 0
                 inclusive: false
                 severity: warn
+                where: count_characters != 0
         - name: count_syllables
           description: '{{ doc("count_syllables") }}'
           tests:
@@ -122,6 +120,7 @@ models:
                 min_value: 0
                 inclusive: false
                 severity: warn
+                where: count_characters != 0
         - name: is_vernacular_speech
           description: '{{ doc("is_vernacular_speech") }}'
         - name: vernacular_speech_language
