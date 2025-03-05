@@ -1,0 +1,24 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-yaml
+      - id: debug-statements
+      - id: requirements-txt-fixer
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: "v3.5.1"
+    hooks:
+      - id: prettier
+        types_or: [yaml]
+  - repo: https://github.com/tconbeer/sqlfmt
+    rev: v0.24.0
+    hooks:
+      - id: sqlfmt
+        language_version: python
+        additional_dependencies: [".[jinjafmt]"]
+        files: ^.*/models/.*$ # only run in models folder
+        args: ["-l", "99"]

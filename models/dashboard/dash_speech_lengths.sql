@@ -8,7 +8,7 @@ with
             and not is_primary_question
             and member_name != ''
             and member_name != 'Speaker'
-            and member_constituency is not NULL
+            and member_constituency is not null
     )
 select *
 from speech_lengths
