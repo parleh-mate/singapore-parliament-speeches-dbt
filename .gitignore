@@ -167,3 +167,5 @@ logs/
 profiles.yml
 .user.yml
 # end dbt Cloud content
+
+token/
