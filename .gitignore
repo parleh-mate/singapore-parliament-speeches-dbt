@@ -165,4 +165,5 @@ target/
 dbt_packages/
 logs/
 profiles.yml
+.user.yml
 # end dbt Cloud content
