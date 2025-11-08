@@ -114,3 +114,19 @@ sources:
               - unique
           - name: member_image_link
             data_type: STRING
+      - name: member_name_link
+        description: >
+          URL links to members in the parliament API
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_name_link
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+            tests:
+              - unique
+          - name: member_link_name
+            data_type: STRING
