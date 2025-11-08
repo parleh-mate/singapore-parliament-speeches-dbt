@@ -26,6 +26,7 @@ with
                     session,
                     member_committee,
                     member_committee_position
+                order by accessed_at desc
             )
             = 1
     ),
