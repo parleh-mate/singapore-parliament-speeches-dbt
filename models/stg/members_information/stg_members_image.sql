@@ -13,6 +13,14 @@ with
         union all
         select member_name, member_image_link
         from gsheet
+    ),
+     -- filter latest entries; nulls not dropped because there are nulls in manual gsheet --
+    filter_latest as (
+        select member_name, member_image_link
+        from unioned
+        qualify row_number() over(
+            partition by member_name order by accessed_at desc
+        ) = 1
     )
 select *
-from unioned
+from filter_latest
