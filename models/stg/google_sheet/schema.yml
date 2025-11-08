@@ -114,6 +114,24 @@ sources:
               - unique
           - name: member_image_link
             data_type: STRING
+      - name: member_party
+        description: >
+          Which party each member belonged to in which parliament. If parliament is blank, then member was in the same party for all parliaments they were in.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_party
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+            tests:
+              - unique
+          - name: party
+            data_type: STRING
+          - name: parliament
+            data_type: INTEGER
       - name: member_name_link
         description: >
           URL links to members in the parliament API
@@ -129,4 +147,20 @@ sources:
             tests:
               - unique
           - name: member_link_name
+            data_type: STRING
+      - name: member_gender
+        description: >
+          Gender of each MP.
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: members_gender
+            skip_leading_rows: 1
+        columns:
+          - name: member_name
+            data_type: STRING
+            tests:
+              - unique
+          - name: gender
             data_type: STRING
