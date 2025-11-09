@@ -29,6 +29,7 @@ with
                 struct(party, parliament)
             ) as party
         from {{ ref("stg_gsheet_member_party") }}
+        group by all
     ),
 
     full_name as (
