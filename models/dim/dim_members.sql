@@ -8,8 +8,8 @@ with
         where member_name is not null
     ),
 
-    seed_member as (
-        select mp_name as member_name, party, gender from {{ ref("member") }}
+    gender as (
+        select mp_name as member_name, gender from {{ ref("stg_gsheet_member_gender") }}
     ),
 
     birth_year as (
@@ -20,6 +20,15 @@ with
     ethnicity as (
         select member_name, member_ethnicity
         from {{ ref("stg_gsheet_member_ethnicity") }}
+    ),
+
+    party as (
+        select
+            member_name,
+            array_agg(
+                struct(party, parliament)
+            ) as party
+        from {{ ref("stg_gsheet_member_party") }}
     ),
 
     full_name as (
@@ -104,8 +113,8 @@ with
             agg.member_name,
             birth_year.member_birth_year,
             ethnicity.member_ethnicity,
-            seed.party,
-            seed.gender,
+            gender.gender,
+            party.party
             constituency.member_constituencies,
             latest_constituency.member_position as latest_member_constituency,
             appointments.member_appointments,
@@ -119,7 +128,8 @@ with
             full_name.member_name_website,
             image.member_image_link
         from agg_attendance as agg
-        left join seed_member as seed on agg.member_name = seed.member_name
+        left join gender on agg.member_name = gender.member_name
+        left join party on agg.member_name = party.member_name
         left join birth_year on agg.member_name = birth_year.member_name
         left join ethnicity on agg.member_name = ethnicity.member_name
         left join full_name on agg.member_name = full_name.member_name
