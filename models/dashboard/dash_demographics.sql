@@ -1,15 +1,15 @@
 with
     get_demographics as (
         select
-            member_name,
-            parliament,
-            party as member_party,
-            member_constituency,
-            member_ethnicity,
-            gender,
-            member_birth_year,
-            extract(year from first_parl_date) - member_birth_year as year_age_entered
-        from {{ ref("dim_members") }}
+            members.member_name,
+            constituency.parliament,
+            party.party,
+            constituency.member_constituency,
+            members.member_ethnicity,
+            members.gender,
+            members.member_birth_year,
+            extract(year from constituency.first_parl_date) - members.member_birth_year as year_age_entered
+        from {{ ref("dim_members") }} as members
         left join
             (
                 select
@@ -20,7 +20,10 @@ with
                 from {{ ref("mart_attendance") }}
                 where member_constituency is not null
                 group by member_name, parliament, member_constituency
-            ) using (member_name)
+            ) as constituency using (member_name)
+        left join {{ ref("stg_gsheet_member_party") }} as party
+        on members.member_name = party.member_name
+        and constituency.parliament = party.parliament
         order by member_name, parliament
     )
 select *
