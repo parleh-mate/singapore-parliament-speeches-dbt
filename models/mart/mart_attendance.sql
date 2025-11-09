@@ -8,9 +8,14 @@ with
 
     sittings as (select date, parliament, session from {{ ref("fact_sittings") }}),
 
-    members as (
-        select member_name, party, gender, member_ethnicity
+    member_demographics as (
+        select member_name, gender, member_ethnicity
         from {{ ref("dim_members") }}
+    ),
+
+    member_party as (
+        select member_name, party, parliament
+        from {{ ref("stg_gsheet_member_party") }}
     ),
 
     member_constituency as (
@@ -32,17 +37,19 @@ with
 
             -- member information
             attendance.member_name,
-            members.party as member_party,
-            members.gender as member_gender,
-            members.member_ethnicity as member_ethnicity,
+            member_demographics.gender as member_gender,
+            member_demographics.member_ethnicity as member_ethnicity,
             member_constituency.constituency as member_constituency,
+            party.party,
 
             -- attendance information
             attendance.is_present
 
         from attendance
         left join sittings on attendance.date = sittings.date
-        left join members on attendance.member_name = members.member_name
+        left join member_demographics as demo on attendance.member_name = demo.member_name
+        left join member_party as party on attendance.member_name = party.member_name
+            and sittings.parliament = party.parliament
         left join
             member_constituency
             on attendance.member_name = member_constituency.member_name
