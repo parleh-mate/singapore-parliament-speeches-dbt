@@ -70,9 +70,11 @@ with
     ),
 
     enrich_member_party as (
-        select join_metrics.*, members.party as member_party
+        select join_metrics.*, 
+        members.party as member_party
         from join_metrics
-        left join {{ ref("dim_members") }} as members using (member_name)
+        left join {{ ref("stg_gsheet_member_party") }} as members 
+        using (member_name, parliament)
     ),
 
     reorder_columns as (
