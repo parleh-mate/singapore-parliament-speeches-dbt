@@ -114,7 +114,7 @@ sources:
               - unique
           - name: member_image_link
             data_type: STRING
-      - name: member_party
+      - name: party
         description: >
           Which party each member belonged to in which parliament. If parliament is blank, then member was in the same party for all parliaments they were in.
         external:
@@ -148,7 +148,7 @@ sources:
               - unique
           - name: member_link_name
             data_type: STRING
-      - name: member_gender
+      - name: gender
         description: >
           Gender of each MP.
         external:
