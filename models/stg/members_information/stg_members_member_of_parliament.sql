@@ -55,7 +55,7 @@ with
             effective_to_date 
             order by accessed_at desc
         ) = 1
-    )
+    ),
 
     -- post-process
     add_latest_flag as (
