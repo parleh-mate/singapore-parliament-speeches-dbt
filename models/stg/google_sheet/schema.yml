@@ -126,7 +126,7 @@ sources:
         columns:
           - name: member_name
             data_type: STRING
-            tests:
+            data_tests:
               - unique:
                   column_names: [member_name, parliament]
           - name: party
