@@ -37,8 +37,8 @@ with
 
             -- member information
             attendance.member_name,
-            member_demographics.gender as member_gender,
-            member_demographics.member_ethnicity as member_ethnicity,
+            demo.gender as member_gender,
+            demo.member_ethnicity as member_ethnicity,
             member_constituency.constituency as member_constituency,
             party.party,
 
