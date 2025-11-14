@@ -23,13 +23,27 @@ with
         from manual_gsheet
     ),
 
+     -- filter latest non null entries --
+    filter_latest as (
+        select member_name, member_appointment, effective_from_date, effective_to_date
+        from unioned
+        where member_appointment is not null
+        qualify row_number() over(
+            partition by member_name, 
+            member_appointment, 
+            effective_from_date, 
+            effective_to_date 
+            order by accessed_at desc
+        ) = 1
+    ),
+
     add_latest_flag as (
         select
             *,
             effective_to_date
             is null  -- when it is null, this is the current appointment
             as is_latest_appointment
-        from unioned
+        from filter_latest
     )
 select *
 from add_latest_flag

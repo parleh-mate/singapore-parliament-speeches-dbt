@@ -18,6 +18,16 @@ with
         union all
         select member_name, member_birth_year
         from manual_gsheet
+    ),
+
+    -- filter latest non null entries --
+    filter_latest as (
+        select member_name, year_of_birth
+        from unioned
+        where year_of_birth is not null
+        qualify row_number() over(
+            partition by member_name order by accessed_at desc
+        ) = 1
     )
 select *
-from unioned
+from filter_latest

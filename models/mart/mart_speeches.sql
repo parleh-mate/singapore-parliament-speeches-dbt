@@ -34,9 +34,14 @@ with
         from {{ ref("fact_sittings") }}
     ),
 
-    members as (
-        select member_name, party, gender, member_ethnicity
+    member_demographics as (
+        select member_name, gender, member_ethnicity
         from {{ ref("dim_members") }}
+    ),
+
+    member_party as (
+        select member_name, party, parliament
+        from {{ ref("stg_gsheet_member_party") }}
     ),
 
     constituencies as (
@@ -67,11 +72,11 @@ with
 
             -- member information
             speeches.member_name,
-            members.party as member_party,
-            members.gender as member_gender,
-            members.member_ethnicity as member_ethnicity,
+            demo.gender as member_gender,
+            demo.member_ethnicity as member_ethnicity,
+            party.party,
             case
-                when members.party = 'NMP'
+                when party.party = 'NMP'
                 then 'Nominated Member of Parliament'
                 else constituencies.constituency
             end as member_constituency,
@@ -100,7 +105,9 @@ with
         from speeches
         left join topics on speeches.topic_id = topics.topic_id
         left join sittings on speeches.date = sittings.date
-        left join members on speeches.member_name = members.member_name
+        left join member_demographics as demo on speeches.member_name = demo.member_name
+        left join member_party as party on speeches.member_name = party.member_name
+            and sittings.parliament = party.parliament
         left join
             constituencies
             on speeches.member_name = constituencies.member_name

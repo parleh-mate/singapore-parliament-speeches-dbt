@@ -42,6 +42,21 @@ with
         from manual_gsheet
     ),
 
+     -- filter latest non null entries --
+    filter_latest as (
+        select member_name, member_constituency, effective_from_date, effective_to_date
+        from unioned
+        where member_constituency is not null
+        qualify row_number() over(
+            partition by 
+            member_name, 
+            member_constituency, 
+            effective_from_date, 
+            effective_to_date 
+            order by accessed_at desc
+        ) = 1
+    ),
+
     -- post-process
     add_latest_flag as (
         select
@@ -58,7 +73,7 @@ with
                     effective_to_date
                     = max(effective_to_date) over (partition by member_name)
             end as is_latest_constituency
-        from unioned
+        from filter_latest
     )
 select *
 from add_latest_flag
