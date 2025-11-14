@@ -18,7 +18,7 @@ with
         from renamed
         union all
         select *
-        from manual_gsheet
+        from gsheet
     ),
 
     -- filter latest non null entries --
