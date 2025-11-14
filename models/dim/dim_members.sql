@@ -9,7 +9,7 @@ with
     ),
 
     gender as (
-        select mp_name as member_name, gender from {{ ref("stg_gsheet_member_gender") }}
+        select member_name, gender from {{ ref("stg_gsheet_member_gender") }}
     ),
 
     birth_year as (
