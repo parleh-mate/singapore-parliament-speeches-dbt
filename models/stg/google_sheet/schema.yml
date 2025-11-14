@@ -127,7 +127,8 @@ sources:
           - name: member_name
             data_type: STRING
             tests:
-              - unique
+              - unique:
+                  column_names: [member_name, parliament]
           - name: party
             data_type: STRING
           - name: parliament
