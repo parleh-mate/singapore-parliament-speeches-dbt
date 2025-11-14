@@ -115,7 +115,7 @@ with
             birth_year.member_birth_year,
             ethnicity.member_ethnicity,
             gender.gender,
-            party.party
+            party.party,
             constituency.member_constituencies,
             latest_constituency.member_position as latest_member_constituency,
             appointments.member_appointments,
