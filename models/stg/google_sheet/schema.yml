@@ -126,13 +126,16 @@ sources:
         columns:
           - name: member_name
             data_type: STRING
-            data_tests:
-              - unique:
-                  column_names: [member_name, parliament]
           - name: party
             data_type: STRING
           - name: parliament
             data_type: INTEGER
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - member_name
+                - party
+                - parliament
       - name: member_name_link
         description: >
           URL links to members in the parliament API

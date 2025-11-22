@@ -4,14 +4,15 @@ with
     renamed as (
         select
             {{ adapter.quote("member_name") }} as member_name,
-            {{ adapter.quote("image_link") }} as member_image_link
+            {{ adapter.quote("image_link") }} as member_image_link,
+            cast(accessed_at as date) as accessed_at
         from source
     ),
     unioned as (
-        select member_name, member_image_link
+        select member_name, member_image_link, accessed_at
         from renamed
         union all
-        select member_name, member_image_link
+        select member_name, member_image_link, accessed_at
         from gsheet
     ),
      -- filter latest entries; nulls not dropped because there are nulls in manual gsheet --
