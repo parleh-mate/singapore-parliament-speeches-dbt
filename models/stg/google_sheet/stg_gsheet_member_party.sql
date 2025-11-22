@@ -1,5 +1,4 @@
 with
-    source as (select * from {{ source("google_sheets", "party") }}),
-    renamed as (select member_name, party as member_party, parliament from source)
+    source as (select * from {{ source("google_sheets", "party") }})
 select *
-from renamed
+from source

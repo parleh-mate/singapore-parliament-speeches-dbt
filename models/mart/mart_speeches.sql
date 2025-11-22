@@ -74,7 +74,7 @@ with
             speeches.member_name,
             demo.gender as member_gender,
             demo.member_ethnicity as member_ethnicity,
-            party.party,
+            party.party as member_party,
             case
                 when party.party = 'NMP'
                 then 'Nominated Member of Parliament'

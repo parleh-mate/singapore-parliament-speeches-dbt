@@ -6,7 +6,8 @@ with
             {{ adapter.quote("parliament") }} as parliament,
             {{ adapter.quote("session") }} as session,
             {{ adapter.quote("committee") }} as member_committee,
-            {{ adapter.quote("position") }} as member_committee_position
+            {{ adapter.quote("position") }} as member_committee_position,
+            cast(accessed_at as date) as accessed_at
 
         from source
     ),
