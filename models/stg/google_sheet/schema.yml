@@ -42,6 +42,8 @@ sources:
         columns:
           - name: member_name
             data_type: STRING
+            tests:
+              - unique
           - name: ethnicity
             data_type: STRING
           - name: is_ethnicity_certain
@@ -168,3 +170,23 @@ sources:
               - unique
           - name: gender
             data_type: STRING
+      - name: parliament_dates
+        description: >
+          Date ranges of each parliament
+        external:
+          options:
+            format: GOOGLE_SHEETS
+            uris: ['https://docs.google.com/spreadsheets/d/1Wk_PDlQbWWViTV9NmDPsXwu54TD96ltEycLAKOHe1fA/']
+            sheet_range: parliament_dates
+            skip_leading_rows: 1
+        columns:
+          - name: parliament
+            data_type: INTEGER
+            tests:
+              - unique
+          - name: from_date
+            data_type: DATE
+          - name: to_date
+            data_type: DATE
+          - name: current
+            data_type: BOOLEAN
