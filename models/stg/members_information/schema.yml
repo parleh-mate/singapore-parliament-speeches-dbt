@@ -25,6 +25,7 @@ models:
             - member_name
             - member_constituency
             - effective_from_date
+            - effective_to_date
   - name: stg_members_office_holding
     description: '{{ doc("models_members_office_holding") }}'
     tests:
@@ -33,6 +34,7 @@ models:
             - member_name
             - member_appointment
             - effective_from_date
+            - effective_to_date
   - name: stg_members_select_committee
     description: '{{ doc("models_members_select_committee") }}'
     tests:
