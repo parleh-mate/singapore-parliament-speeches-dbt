@@ -1,41 +1,7 @@
 with
     source as (select * from {{ source("raw", "members_member_of_parliament") }}),
 
-    current_members as (
-        select distinct member_name
-        from source
-        where accessed_at >= (select max(accessed_at) from source)
-    ),
-    clean_raw as (
-        select
-            member_name,
-            constituency,
-            from_date,
-            case
-                when
-                    to_date is null
-                    and member_name not in (select member_name from current_members)
-                then '2025-04-14'
-                else to_date
-            end as to_date,
-            case
-                when
-                    to_date is null
-                    and member_name not in (select member_name from current_members)
-                then replace(date_range, 'Current', '14 April 2025')
-                else date_range
-            end as date_range,
-            accessed_at
-        from source
-        -- extract non current members, and for current members, take only most
-        -- recently scraped info
-        where
-            member_name not in (select member_name from current_members)
-            or (
-                member_name in (select member_name from current_members)
-                and accessed_at = (select max(accessed_at) from source)
-            )
-    ),
+    parliament_dates as (select * from {{ ref("stg_gsheet_parliament_dates") }}),
 
     renamed as (
         select
@@ -47,6 +13,45 @@ with
             cast(accessed_at as date) as accessed_at
 
         from source
+    ),
+
+    current_members as (
+        select distinct member_name
+        from renamed
+        where accessed_at = (select max(accessed_at) from renamed)
+    ),
+    clean_raw as (
+        select
+            renamed.member_name,
+            renamed.member_constituency,
+            renamed.effective_from_date,
+            case
+                when
+                    renamed.effective_to_date is null
+                    and renamed.member_name not in (select member_name from current_members)
+                then pd.to_date
+                else renamed.effective_to_date
+            end as effective_to_date,
+            case
+                when
+                    renamed.effective_to_date is null
+                    and renamed.member_name not in (select member_name from current_members)
+                then replace(date_range, 'Current', FORMAT_DATE('%-d %B %Y', pd.to_date)
+)
+                else date_range
+            end as date_range,
+        renamed.accessed_at
+        from renamed
+        left join parliament_dates pd
+        on renamed.effective_from_date between pd.from_date and pd.to_date
+        -- extract non current members, and for current members, take only most
+        -- recently scraped info
+        where
+            renamed.member_name not in (select member_name from current_members)
+            or (
+                renamed.member_name in (select member_name from current_members)
+                and renamed.accessed_at = (select max(accessed_at) from renamed)
+            )
     ),
 
     process as (
@@ -90,8 +95,7 @@ with
             partition by 
             member_name, 
             member_constituency, 
-            effective_from_date, 
-            effective_to_date 
+            effective_from_date
             order by accessed_at desc
         ) = 1
     ),
