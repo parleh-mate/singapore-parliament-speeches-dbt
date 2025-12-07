@@ -3,7 +3,7 @@ with
         select
             members.member_name,
             constituency.parliament,
-            party.party,
+            party.party as member_party,
             constituency.member_constituency,
             members.member_ethnicity,
             members.gender,
