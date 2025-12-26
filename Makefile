@@ -1,4 +1,5 @@
-@gcloud functions deploy run-dbt \
+deploy:
+	@gcloud functions deploy run-dbt \
   --gen2 \
   --region=us-central1 \
   --runtime=python310 \
