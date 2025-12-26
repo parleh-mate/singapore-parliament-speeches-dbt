@@ -6,7 +6,6 @@ deploy:
   --source=. \
   --entry-point=run_dbt \
   --trigger-http \
-  --allow-unauthenticated \
   --memory=1Gi \
   --timeout=600s \
   --concurrency=1 \
