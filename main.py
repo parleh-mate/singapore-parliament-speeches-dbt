@@ -2,7 +2,7 @@ import os
 import subprocess
 
 
-def run_dbt(request):
+def run_dbt(_request):
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Put dbt artifacts somewhere writable (Cloud Functions/Run)
