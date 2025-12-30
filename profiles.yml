@@ -1,0 +1,21 @@
+singapore-parliament-speeches:
+  # Default for local runs: no flags, no env vars
+  target: local_sa
+
+  outputs:
+    # Local: uses your gitignored service-account JSON
+    local_sa:
+      type: bigquery
+      method: service-account
+      project: singapore-parliament-speeches
+      dataset: prod
+      threads: 4
+      keyfile: "secrets/gcp_token.json"
+
+    # Cloud: uses ADC (Cloud Function runtime service account)
+    cloud_adc:
+      type: bigquery
+      method: oauth
+      project: singapore-parliament-speeches
+      dataset: prod
+      threads: 4
